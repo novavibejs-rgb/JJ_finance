@@ -1,4 +1,5 @@
-from banco.database import conectar
+from banco.conexao import conectar
+from utils.datas import inicio_semana, fim_semana
 
 
 def listar_socios():
@@ -18,7 +19,6 @@ def listar_socios():
         """)
 
         return cursor.fetchall()
-
 
 
 def total_socios():

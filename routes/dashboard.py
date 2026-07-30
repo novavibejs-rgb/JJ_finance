@@ -1,17 +1,27 @@
 from flask import Blueprint, render_template
 
-from banco.socios import listar_socios, total_socios
+from banco import faturamentos as faturamentos 
+from services import financeiro as finaceiro
+from banco import despesas as despesas
+from utils.Formata_moeda import moeda
+
 
 dashboard_bp = Blueprint("dashboard", __name__)
 
 @dashboard_bp.route("/")
 def index():
 
-    socios = listar_socios()
-    quantidade_socios = total_socios()
+    
+    faturamento = moeda(faturamentos.faturamento_semana())
+    reserva = moeda(finaceiro.calcular_reserva())
+    lucro = moeda(finaceiro.calcular_lucro())
+    somar = moeda(despesas.somar_despesas())
 
     return render_template(
         "dashboard/index.html",
-        socios=socios,
-        total_socios=quantidade_socios
+        faturamento=faturamento,
+        fundo_transporte=reserva,
+        lucro_liquido=lucro,
+        somar=somar
+ 
     )

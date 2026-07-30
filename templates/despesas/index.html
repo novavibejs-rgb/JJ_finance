@@ -1,0 +1,43 @@
+{% extends "layout/base.html" %} {% block titulo %} Despesas da Empresa {%
+endblock %} {% block conteudo %}
+
+<h1>Despesas da Empresa</h1>
+
+<a href="{{ url_for('despesas.nova') }}"> Nova Despesa </a>
+
+<br /><br />
+
+<table>
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Categoria</th>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Observação</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for despesa in despesas %}
+
+    <tr>
+      <td>{{ despesa[4] }}</td>
+      <td>{{ despesa[1] }}</td>
+      <td>{{ despesa[2] }}</td>
+      <td>R$ {{ "%.2f"|format(despesa[3]|float) }}</td>
+      <td>{{ despesa[5] }}</td>
+
+      <td>
+        <a href="{{ url_for('despesas.editar', id=despesa[0]) }}"> Editar </a>
+
+        <a href="{{ url_for('despesas.excluir', id=despesa[0]) }}"> Excluir </a>
+      </td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

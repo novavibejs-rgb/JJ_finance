@@ -1,0 +1,25 @@
+{% extends "layout/base.html" %} {% block titulo %} Nova Despesa {% endblock %}
+{% block conteudo %}
+
+<h1>Nova Despesa</h1>
+
+<form method="POST">
+  <label>Categoria</label><br />
+  <input type="text" name="categoria" /><br /><br />
+
+  <label>Descrição</label><br />
+  <input type="text" name="descricao" /><br /><br />
+
+  <label>Valor</label><br />
+  <input type="number" step="0.01" name="valor" /><br /><br />
+
+  <label>Data</label><br />
+  <input type="date" name="data" /><br /><br />
+
+  <label>Observação</label><br />
+  <textarea name="observacao"></textarea><br /><br />
+
+  <button type="submit">Salvar</button>
+</form>
+
+{% endblock %}
