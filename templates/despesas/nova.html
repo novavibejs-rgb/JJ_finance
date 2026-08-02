@@ -1,25 +1,32 @@
-{% extends "layout/base.html" %} {% block titulo %} Nova Despesa {% endblock %}
-{% block conteudo %}
+<div class="form-container">
+  <h1>Nova Despesa</h1>
 
-<h1>Nova Despesa</h1>
+  <form method="POST">
+    <div class="form-group">
+      <label>Categoria</label>
+      <input class="form-control" type="text" name="categoria" />
+    </div>
 
-<form method="POST">
-  <label>Categoria</label><br />
-  <input type="text" name="categoria" /><br /><br />
+    <div class="form-group">
+      <label>Descrição</label>
+      <input class="form-control" type="text" name="descricao" />
+    </div>
 
-  <label>Descrição</label><br />
-  <input type="text" name="descricao" /><br /><br />
+    <div class="form-group">
+      <label>Valor</label>
+      <input class="form-control" type="number" step="0.01" name="valor" />
+    </div>
 
-  <label>Valor</label><br />
-  <input type="number" step="0.01" name="valor" /><br /><br />
+    <div class="form-group">
+      <label>Data</label>
+      <input class="form-control" type="date" name="data" />
+    </div>
 
-  <label>Data</label><br />
-  <input type="date" name="data" /><br /><br />
+    <div class="form-group">
+      <label>Observação</label>
+      <textarea class="form-control" name="observacao"></textarea>
+    </div>
 
-  <label>Observação</label><br />
-  <textarea name="observacao"></textarea><br /><br />
-
-  <button type="submit">Salvar</button>
-</form>
-
-{% endblock %}
+    <button type="submit">Salvar</button>
+  </form>
+</div>
