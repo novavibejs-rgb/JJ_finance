@@ -51,7 +51,7 @@ def somar_despesas():
 
     cursor.execute("""
         SELECT COALESCE(SUM(valor), 0) AS total
-        FROM servicos
+        FROM despesas_empresa
         WHERE data >= ?
     """, (inicio_semana(),))
 

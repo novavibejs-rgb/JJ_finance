@@ -6,9 +6,15 @@
   </div>
 
   <nav class="sidebar-menu">
-    <a href="#" class="menu-item active"> 🏠 Dashboard </a>
+    <a href="{{ url_for('dashboard.index') }}" class="menu-item active">
+      🏠 Dashboard
+    </a>
 
     <a href="#" class="menu-item"> 👥 Sócios </a>
+
+    <a href="{{ url_for('despesas.index') }}" class="menu-item">
+      🗃 Despesas
+    </a>
 
     <a href="#" class="menu-item"> 🛠 Serviços </a>
 

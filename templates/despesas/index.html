@@ -9,7 +9,7 @@ endblock %} {% block conteudo %}
 
 <br /><br />
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Data</th>
@@ -42,6 +42,7 @@ endblock %} {% block conteudo %}
         <a
           class="btn btn-danger"
           href="{{ url_for('despesas.excluir', id=despesa[0]) }}"
+          onclick="return confirm('Deseja realmente excluir esta despesa?');"
         >
           🗑 Excluir
         </a>
