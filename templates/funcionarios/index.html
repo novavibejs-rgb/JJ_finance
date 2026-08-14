@@ -1,0 +1,136 @@
+{% extends "layout/base.html" %} {% block titulo %} Funcionários {% endblock %}
+{% block conteudo %}
+
+<div class="page-header">
+  <div>
+    <h1>👥 Gestão de Funcionários</h1>
+    <p>Gerencie todos os funcionários da empresa.</p>
+  </div>
+
+  <!--
+        ROTA: funcionários.novo
+        Será criada posteriormente.
+    -->
+  <a class="btn btn-primary" href="{{ url_for('funcionarios.novo') }}">
+    ➕ Novo Funcionário
+  </a>
+</div>
+
+<!-- =========================================================
+     PESQUISA
+========================================================= -->
+
+<div class="search-box">
+  <input
+    type="text"
+    placeholder="🔍 Pesquisar funcionário..."
+    id="pesquisaFuncionario"
+  />
+</div>
+
+<!-- =========================================================
+     LISTA DE FUNCIONÁRIOS
+========================================================= -->
+
+<div class="funcionarios-lista">
+  {% for funcionario in funcionarios %}
+
+  <div class="funcionario-card">
+    <!-- ID -->
+    <div class="funcionario-id">ID-{{ "%03d"|format(funcionario["id"]) }}</div>
+
+    <!-- AVATAR -->
+    <div class="funcionario-avatar">👤</div>
+
+    <!-- INFORMAÇÕES -->
+    <div class="funcionario-info">
+      <h3>{{ funcionario["nome"] }}</h3>
+
+      <p>{{ funcionario["email"] or "Sem e-mail" }}</p>
+
+      <small> 📞 {{ funcionario["telefone"] or "Sem telefone" }} </small>
+    </div>
+
+    <!-- STATUS -->
+    <div class="funcionario-status">
+      {% if funcionario["status"] == "online" %}
+
+      <span class="badge online"> 🟢 Online </span>
+
+      {% else %}
+
+      <span class="badge offline"> ⚫ Offline </span>
+
+      {% endif %}
+    </div>
+
+    <!-- =================================================
+             AÇÕES
+        ================================================== -->
+
+    <div class="funcionario-acoes">
+      <!-- EDITAR -->
+      <a
+        class="btn btn-warning"
+        href="{{ url_for('funcionarios.editar', id=funcionario['id']) }}"
+        title="Editar funcionário"
+      >
+        ✏️
+      </a>
+
+      <!-- EXCLUIR -->
+      <a
+        class="btn btn-danger"
+        href="{{ url_for('funcionarios.excluir', id=funcionario['id']) }}"
+        title="Excluir funcionário"
+        onclick="
+          return confirm('Tem certeza que deseja excluir este funcionário?');
+        "
+      >
+        🗑️
+      </a>
+    </div>
+  </div>
+
+  {% else %}
+
+  <!-- =====================================================
+         NENHUM FUNCIONÁRIO
+    ====================================================== -->
+
+  <div class="nenhum-funcionario">
+    <div class="funcionario-avatar">👤</div>
+
+    <h3>Nenhum funcionário cadastrado</h3>
+
+    <p>Cadastre o primeiro funcionário para começar.</p>
+  </div>
+
+  {% endfor %}
+</div>
+
+<!-- =========================================================
+     PESQUISA EM TEMPO REAL
+========================================================= -->
+
+<script>
+  const pesquisa = document.getElementById("pesquisaFuncionario");
+
+  pesquisa.addEventListener("input", function () {
+    const termo = this.value.toLowerCase();
+
+    const funcionarios = document.querySelectorAll(".funcionario-card");
+
+    funcionarios.forEach(function (card) {
+      const texto = card.innerText.toLowerCase();
+
+      if (texto.includes(termo)) {
+        card.style.display = "";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+</script>
+
+{% endblock %} ```

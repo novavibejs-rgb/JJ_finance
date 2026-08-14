@@ -10,6 +10,7 @@ def criar_tabelas():
         nome TEXT NOT NULL,
         email TEXT,
         foto TEXT
+        
     )
     """)
 
@@ -60,6 +61,20 @@ def criar_tabelas():
         observacao TEXT
     )
     """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS funcionarios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        cargo TEXT,
+        email TEXT,
+        telefone TEXT,
+        foto TEXT,
+        status TEXT NOT NULL DEFAULT 'offline',
+        data_admissao TEXT
+    )
+    """)
+
 
     conn.commit()
     conn.close()

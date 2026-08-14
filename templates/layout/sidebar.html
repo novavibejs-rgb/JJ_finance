@@ -10,7 +10,11 @@
       🏠 Dashboard
     </a>
 
-    <a href="#" class="menu-item"> 👥 Sócios </a>
+    <a href="{{ url_for('socios.index') }}" class="menu-item"> 👥 Sócios </a>
+
+    <a href="{{ url_for('funcionarios.index') }}" class="menu-item">
+      👥 Funcionários
+    </a>
 
     <a href="{{ url_for('despesas.index') }}" class="menu-item">
       🗃 Despesas

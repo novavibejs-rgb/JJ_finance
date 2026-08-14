@@ -1,0 +1,67 @@
+{% extends "layout/base.html" %} {% block titulo %} Sócios {% endblock %} {%
+block conteudo %}
+
+<div class="page-header">
+  <div>
+    <h1>👥 Gestão de Sócios</h1>
+    <p>Gerencie todos os sócios da empresa.</p>
+  </div>
+
+  <a class="btn btn-primary" href="{{ url_for('socios.index') }}">
+    ➕ Novo Sócio
+  </a>
+</div>
+
+<div class="search-box">
+  <input type="text" placeholder="🔍 Pesquisar sócio..." />
+</div>
+
+<div class="socios-lista">
+  {% for socio in socios %}
+
+  <div class="socio-card">
+    <div class="socio-id">ID-{{ "%03d"|format(socio["id"]) }}</div>
+
+    <div class="socio-avatar">👤</div>
+
+    <div class="socio-info">
+      <h3>{{ socio["nome"] }}</h3>
+
+      <p>{{ socio["email"] }}</p>
+
+      <small>{{ socio["telefone"] or "Sem telefone" }}</small>
+    </div>
+
+    <div class="socio-status">
+      {% if socio["status"] == "online" %}
+
+      <span class="badge online"> 🟢 Online </span>
+
+      {% else %}
+
+      <span class="badge offline"> ⚫ Offline </span>
+
+      {% endif %}
+    </div>
+
+    <div class="socio-acoes">
+      <a
+        class="btn btn-warning"
+        href="{{ url_for('socios.editar') }}"
+      >
+        ✏
+      </a>
+
+      <a
+        class="btn btn-danger"
+        href="{{ url_for('socios.excluir') }}"
+      >
+        🗑
+      </a>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
+
+{% endblock %}

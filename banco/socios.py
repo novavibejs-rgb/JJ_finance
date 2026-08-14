@@ -4,21 +4,26 @@ from utils.datas import inicio_semana, fim_semana
 
 def listar_socios():
 
-    with conectar() as conn:
+    conn = conectar()
+    cursor = conn.cursor()
 
-        cursor = conn.cursor()
+    cursor.execute("""
+        SELECT
+            id,
+            nome,
+            email,
+            telefone,
+            foto,
+            status
+        FROM socios
+        ORDER BY nome
+    """)
 
-        cursor.execute("""
-            SELECT
-                id,
-                nome,
-                email,
-                foto
-            FROM socios
-            ORDER BY nome
-        """)
+    socios = cursor.fetchall()
 
-        return cursor.fetchall()
+    conn.close()
+
+    return socios
 
 
 def total_socios():
