@@ -20,10 +20,12 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/forms.css') }}"
     />
+
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/buttons.css') }}"
     />
+
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/tables.css') }}"
@@ -33,16 +35,37 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/socios.css') }}"
     />
+
+    {% block css %}{% endblock %}
   </head>
 
   <body>
     {% include "layout/navbar.html" %}
 
-    <main class="container">
+    <!-- BOTÃO DO MENU NO CELULAR -->
+    <button
+      class="mobile-menu-btn"
+      id="mobileMenuBtn"
+      type="button"
+      aria-label="Abrir menu"
+    >
+      ☰
+    </button>
+
+    <main class="app-container">
       {% include "layout/sidebar.html" %}
 
       <section class="conteudo">{% block conteudo %}{% endblock %}</section>
     </main>
+
+    <script>
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const sidebar = document.querySelector(".sidebar");
+
+      mobileMenuBtn.addEventListener("click", function () {
+        sidebar.classList.toggle("mobile-open");
+      });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   </body>

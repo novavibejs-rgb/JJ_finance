@@ -1,14 +1,28 @@
+/* =========================================================
+   RESET
+   ========================================================= */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* =========================================================
+   BODY
+   ========================================================= */
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f5f7fa;
   color: #1f2937;
+
+  overflow-x: hidden;
 }
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
 
 .navbar {
   width: 100%;
@@ -43,63 +57,42 @@ body {
   font-size: 14px;
 }
 
-.container {
+/* =========================================================
+   CONTAINER PRINCIPAL
+   IMPORTANTE:
+   Não usar .container porque o Bootstrap já usa essa classe.
+   ========================================================= */
+
+.app-container {
   display: flex;
-  min-height: calc(100vh - 70px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
 .sidebar {
-  width: 240px;
+  width: 250px;
+  min-width: 250px;
 
   background: #ffffff;
 
   border-right: 1px solid #ddd;
 
-  padding: 20px;
-}
-
-.sidebar-logo {
-  margin-bottom: 30px;
-}
-
-.sidebar-menu {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 15px;
-}
-
-.sidebar-menu a {
-  text-decoration: none;
-
-  color: #333;
-
-  font-weight: 600;
-
-  transition: 0.2s;
-}
-
-.sidebar-menu a:hover {
-  color: #0e36a3;
-}
-
-.conteudo {
-  flex: 1;
-
-  padding: 30px;
-}
-
-.sidebar {
-  width: 250px;
-  background: #fff;
-  border-right: 1px solid #ddd;
+  padding: 40px 35px 30px;
 
   display: flex;
   flex-direction: column;
 
-  justify-content: space-between;
+  min-height: calc(100vh - 70px);
 }
+
+/* =========================================================
+   LOGO SIDEBAR
+   ========================================================= */
 
 .sidebar-logo {
   padding-bottom: 30px;
@@ -115,6 +108,10 @@ body {
   color: #777;
 }
 
+/* =========================================================
+   MENU
+   ========================================================= */
+
 .sidebar-menu {
   display: flex;
 
@@ -123,6 +120,10 @@ body {
   margin-top: 30px;
 
   gap: 8px;
+}
+
+.sidebar-menu a {
+  text-decoration: none;
 }
 
 .menu-item {
@@ -135,6 +136,8 @@ body {
   border-radius: 10px;
 
   transition: 0.2s;
+
+  display: block;
 }
 
 .menu-item:hover {
@@ -149,6 +152,10 @@ body {
   color: white;
 }
 
+/* =========================================================
+   FOOTER SIDEBAR
+   ========================================================= */
+
 .sidebar-footer {
   margin-top: auto;
 
@@ -157,4 +164,233 @@ body {
   border-top: 1px solid #eee;
 
   color: #999;
+}
+
+/* =========================================================
+   CONTEÚDO
+   ========================================================= */
+
+.conteudo {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* =========================================================
+   BOTÃO MOBILE
+   ========================================================= */
+.mobile-menu-btn {
+  display: none;
+
+  border: none;
+  border-radius: 10px;
+
+  width: 45px;
+  height: 45px;
+
+  background: #05da45;
+  color: white;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+
+    padding: 30px 20px;
+  }
+
+  .conteudo {
+    padding: 25px;
+  }
+}
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 768px) {
+  /* -----------------------------------------
+     NAVBAR
+     ----------------------------------------- */
+
+  .navbar {
+    min-height: 60px;
+
+    padding: 0 15px 0 75px;
+
+    position: relative;
+    z-index: 1000;
+  }
+
+  .logo-principal {
+    font-size: 20px;
+  }
+
+  .logo-nome {
+    display: none;
+  }
+
+  .navbar-subtitulo {
+    display: none;
+  }
+
+  /* -----------------------------------------
+     CONTAINER
+     ----------------------------------------- */
+
+  .app-container {
+    display: block;
+
+    width: 100%;
+
+    min-height: calc(100vh - 60px);
+  }
+
+  /* -----------------------------------------
+     SIDEBAR
+     ----------------------------------------- */
+
+  .sidebar {
+    position: fixed;
+
+    top: 60px;
+    left: -280px;
+
+    width: 260px;
+    min-width: 260px;
+
+    height: calc(100vh - 60px);
+    min-height: 0;
+
+    padding: 25px 20px;
+
+    z-index: 1000;
+
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.15);
+
+    transition: left 0.25s ease;
+
+    overflow-y: auto;
+  }
+
+  /* MENU ABERTO */
+
+  .sidebar.mobile-open {
+    left: 0;
+  }
+
+  /* -----------------------------------------
+     BOTÃO MENU
+     ----------------------------------------- */
+
+  .mobile-menu-btn {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+
+    left: 15px;
+    top: 8px;
+
+    z-index: 1001;
+  }
+  /* -----------------------------------------
+     CONTEÚDO
+     ----------------------------------------- */
+
+  .conteudo {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 20px 15px;
+
+    margin: 0;
+
+    min-width: 0;
+
+    overflow-x: hidden;
+  }
+
+  /* -----------------------------------------
+     TÍTULOS
+     ----------------------------------------- */
+
+  .conteudo h1 {
+    font-size: 32px;
+
+    line-height: 1.15;
+
+    word-break: normal;
+  }
+
+  .conteudo h2 {
+    font-size: 26px;
+  }
+
+  .conteudo h3 {
+    font-size: 22px;
+  }
+
+  /* -----------------------------------------
+     BOTÕES
+     ----------------------------------------- */
+
+  .conteudo .btn {
+    max-width: 100%;
+
+    white-space: normal;
+  }
+
+  /* -----------------------------------------
+     INPUTS
+     ----------------------------------------- */
+
+  .conteudo input,
+  .conteudo select,
+  .conteudo textarea {
+    max-width: 100%;
+  }
+
+  /* -----------------------------------------
+     TABELAS
+     ----------------------------------------- */
+
+  .conteudo table {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .conteudo {
+    padding: 20px 12px;
+  }
+
+  .conteudo h1 {
+    font-size: 28px;
+  }
+
+  .conteudo h2 {
+    font-size: 24px;
+  }
+
+  .mobile-menu-btn {
+    left: 10px;
+  }
 }

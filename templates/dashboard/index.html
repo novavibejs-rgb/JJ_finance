@@ -1,7 +1,16 @@
-{% extends "layout/base.html" %} {% block titulo %} Dashboard {% endblock %} {%
-block conteudo %}
+{% extends "layout/base.html" %} {% block titulo %}Dashboard{% endblock %} {%
+block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/dashboard.css') }}"
+/>
+{% endblock %} {% block conteudo %}
 
 <h2 class="mb-4">Dashboard</h2>
 
 {% include "dashboard/componentes/cards.html" %} {% include
-"dashboard/componentes/painel_inferior.html" %} {% endblock %}
+"dashboard/componentes/painel_inferior.html" %}
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+{% endblock %}

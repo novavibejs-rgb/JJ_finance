@@ -1,40 +1,96 @@
 <div class="row g-4">
+  <!-- FATURAMENTO -->
   <div class="col-md-6 col-xl-3">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h6 class="text-muted">💰 Faturamento</h6>
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="text-muted mb-0">💰 Faturamento</h6>
 
-        <h3>R$ {{ faturamento }}</h3>
+          <button
+            type="button"
+            class="toggle-valores"
+            aria-label="Ocultar valor"
+            title="Ocultar valor"
+          >
+            👁️
+          </button>
+        </div>
+
+        <h3 class="valor-dashboard" data-valor="R$ {{ faturamento }}">
+          R$ {{ faturamento }}
+        </h3>
       </div>
     </div>
   </div>
 
+  <!-- LUCRO -->
   <div class="col-md-6 col-xl-3">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h6 class="text-muted">📈 Lucro Líquido</h6>
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="text-muted mb-0">📈 Lucro Líquido</h6>
 
-        <h3>R$ {{ lucro_liquido }}</h3>
+          <button
+            type="button"
+            class="toggle-valores"
+            aria-label="Ocultar valor"
+            title="Ocultar valor"
+          >
+            👁️
+          </button>
+        </div>
+
+        <h3 class="valor-dashboard" data-valor="R$ {{ lucro_liquido }}">
+          R$ {{ lucro_liquido }}
+        </h3>
       </div>
     </div>
   </div>
 
+  <!-- DESPESAS -->
   <div class="col-md-6 col-xl-3">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h6 class="text-muted">💼 Despesas da Empresas</h6>
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="text-muted mb-0">💼 Despesas da Empresa</h6>
 
-        <h3>R$ {{ somar }}</h3>
+          <button
+            type="button"
+            class="toggle-valores"
+            aria-label="Ocultar valor"
+            title="Ocultar valor"
+          >
+            👁️
+          </button>
+        </div>
+
+        <h3 class="valor-dashboard" data-valor="R$ {{ somar }}">
+          R$ {{ somar }}
+        </h3>
       </div>
     </div>
   </div>
 
+  <!-- FUNDO DE TRANSPORTE -->
   <div class="col-md-6 col-xl-3">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h6 class="text-muted">🏍 Fundo de Transporte</h6>
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="text-muted mb-0">🏍 Fundo de Transporte</h6>
 
-        <h3>R$ {{ fundo_transporte }}</h3>
+          <button
+            type="button"
+            class="toggle-valores"
+            aria-label="Ocultar valor"
+            title="Ocultar valor"
+          >
+            👁️
+          </button>
+        </div>
+
+        <h3 class="valor-dashboard" data-valor="R$ {{ fundo_transporte }}">
+          R$ {{ fundo_transporte }}
+        </h3>
       </div>
     </div>
   </div>

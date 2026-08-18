@@ -1,6 +1,10 @@
-{% extends "layout/base.html" %} {% block titulo %} Editar Funcionário {%
-endblock %} {% block conteudo %}
-
+{% extends "layout/base.html" %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/funcionarios.css') }}"
+/>
+{% endblock %} {% block titulo %} Editar Funcionário {% endblock %} {% block
+conteudo %}
 <div class="page-header">
   <div>
     <h1>✏️ Editar Funcionário</h1>

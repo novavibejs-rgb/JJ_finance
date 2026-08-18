@@ -1,6 +1,65 @@
-{% extends "layout/base.html" %} {% block titulo %} Novo Sócio {% endblock %} {%
-block conteudo %}
+{% extends "layout/base.html" %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/socios.css') }}"
+/>
+{% endblock %} {% block titulo %} Novo Sócio {% endblock %} {% block conteudo %}
 
-<h1>👤 Novo Sócio</h1>
+<div class="page-header">
+  <div>
+    <h1>➕ Novo Sócio</h1>
+    <p>Cadastre um novo sócio da empresa.</p>
+  </div>
+
+  <a class="btn btn-secondary" href="{{ url_for('socios.index') }}">
+    ← Voltar
+  </a>
+</div>
+
+<div class="card socio-form">
+  <form method="POST">
+    <div class="form-group">
+      <label for="nome"> Nome completo </label>
+
+      <input
+        type="text"
+        id="nome"
+        name="nome"
+        placeholder="Digite o nome do sócio"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email"> E-mail </label>
+
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Digite o e-mail"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="telefone"> Telefone </label>
+
+      <input
+        type="text"
+        id="telefone"
+        name="telefone"
+        placeholder="(00) 00000-0000"
+      />
+    </div>
+
+    <div class="form-actions">
+      <a class="btn btn-secondary" href="{{ url_for('socios.index') }}">
+        Cancelar
+      </a>
+
+      <button type="submit" class="btn btn-primary">💾 Salvar Sócio</button>
+    </div>
+  </form>
+</div>
 
 {% endblock %}

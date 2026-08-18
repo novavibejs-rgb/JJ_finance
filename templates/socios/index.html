@@ -7,13 +7,13 @@ block conteudo %}
     <p>Gerencie todos os sócios da empresa.</p>
   </div>
 
-  <a class="btn btn-primary" href="{{ url_for('socios.index') }}">
+  <a class="btn btn-primary" href="{{ url_for('socios.novo') }}">
     ➕ Novo Sócio
   </a>
 </div>
 
 <div class="search-box">
-  <input type="text" placeholder="🔍 Pesquisar sócio..." />
+  <input type="text" placeholder="🔍 Pesquisar sócio..." id="pesquisaSocio" />
 </div>
 
 <div class="socios-lista">
@@ -47,14 +47,18 @@ block conteudo %}
     <div class="socio-acoes">
       <a
         class="btn btn-warning"
-        href="{{ url_for('socios.editar') }}"
+        href="{{ url_for('socios.editar', id=socio['id']) }}"
       >
         ✏
       </a>
 
       <a
         class="btn btn-danger"
-        href="{{ url_for('socios.excluir') }}"
+        href="{{ url_for('socios.excluir', id=socio['id']) }}"
+        title="Excluir funcionário"
+        onclick="
+          return confirm('Tem certeza que deseja excluir este funcionário?');
+        "
       >
         🗑
       </a>
@@ -63,5 +67,23 @@ block conteudo %}
 
   {% endfor %}
 </div>
+<script>
+  const pesquisaSocio = document.getElementById("pesquisaSocio");
 
+  pesquisaSocio.addEventListener("input", function () {
+    const termo = this.value.toLowerCase();
+
+    const socios = document.querySelectorAll(".socio-card");
+
+    socios.forEach(function (card) {
+      const texto = card.innerText.toLowerCase();
+
+      if (texto.includes(termo)) {
+        card.style.display = "";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+</script>
 {% endblock %}

@@ -1,0 +1,64 @@
+/* =========================================================
+   DESPESAS
+   ========================================================= */
+
+/* Permite que o conteúdo encolha dentro do layout */
+.conteudo {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Área responsável pela rolagem da tabela */
+.tabela-despesas-wrapper {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  overflow-x: auto;
+  overflow-y: visible;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+/* A tabela pode ser maior que a tela */
+.tabela-despesas {
+  width: 100%;
+  min-width: 950px;
+}
+
+/* Não deixa as colunas serem esmagadas */
+.tabela-despesas th,
+.tabela-despesas td {
+  white-space: nowrap;
+}
+
+/* Mantém os botões juntos */
+.tabela-despesas td:last-child {
+  white-space: nowrap;
+}
+/* =========================================================
+   DESPESAS
+   ========================================================= */
+
+.tabela-despesas-wrapper {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabela-despesas {
+  width: 100%;
+  min-width: 1000px !important;
+  margin-bottom: 0;
+}
+
+.tabela-despesas th,
+.tabela-despesas td {
+  white-space: nowrap;
+}

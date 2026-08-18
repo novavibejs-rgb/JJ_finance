@@ -1,0 +1,576 @@
+/* =========================================================
+   FUNCIONÁRIOS
+   ========================================================= */
+
+.funcionarios-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.funcionarios-container .page-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+  margin-bottom: 25px;
+
+  box-sizing: border-box;
+}
+
+.funcionarios-container .page-header h1 {
+  margin: 0;
+}
+
+.funcionarios-container .page-header p {
+  margin: 6px 0 0;
+  opacity: 0.7;
+}
+
+/* =========================================================
+   PESQUISA
+   ========================================================= */
+
+.funcionarios-search {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.funcionarios-search input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 13px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: inherit;
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+.funcionarios-search input:focus {
+  border-color: #4f8cff;
+
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.12);
+}
+
+/* =========================================================
+   LISTA
+   ========================================================= */
+
+.funcionarios-lista {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+/* =========================================================
+   CARD DO FUNCIONÁRIO
+   ========================================================= */
+
+.funcionario-card {
+  display: grid;
+
+  grid-template-columns:
+    70px
+    55px
+    minmax(180px, 1fr)
+    100px
+    auto;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 16px 18px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.funcionario-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(79, 140, 255, 0.35);
+
+  background: rgba(255, 255, 255, 0.055);
+}
+
+/* =========================================================
+   ID
+   ========================================================= */
+
+.funcionario-id {
+  font-size: 12px;
+
+  font-weight: 700;
+
+  opacity: 0.55;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.funcionario-avatar {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(79, 140, 255, 0.12);
+
+  font-size: 23px;
+}
+
+/* =========================================================
+   INFORMAÇÕES
+   ========================================================= */
+
+.funcionario-info {
+  min-width: 0;
+}
+
+.funcionario-info h3 {
+  margin: 0 0 4px;
+
+  font-size: 16px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.funcionario-info p {
+  margin: 0 0 5px;
+
+  font-size: 13px;
+
+  opacity: 0.7;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.funcionario-info small {
+  font-size: 12px;
+
+  opacity: 0.6;
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.funcionario-status {
+  display: flex;
+
+  justify-content: center;
+}
+
+.funcionario-status .badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+.funcionario-status .online {
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.funcionario-status .offline {
+  background: rgba(148, 163, 184, 0.1);
+}
+
+/* =========================================================
+   AÇÕES
+   ========================================================= */
+
+.funcionario-acoes {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 7px;
+}
+
+.funcionario-acoes .btn {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border-radius: 9px;
+
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.funcionario-acoes .btn:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   NENHUM FUNCIONÁRIO
+   ========================================================= */
+
+.nenhum-funcionario {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 60px 20px;
+
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+
+  border-radius: 15px;
+
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.nenhum-funcionario .funcionario-avatar {
+  margin-bottom: 15px;
+}
+
+.nenhum-funcionario h3 {
+  margin: 0 0 8px;
+}
+
+.nenhum-funcionario p {
+  margin: 0 0 20px;
+
+  opacity: 0.65;
+}
+
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
+
+.funcionario-form {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.funcionario-form form {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   GRUPO DO CAMPO
+   ========================================================= */
+
+.funcionario-form .form-group {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.funcionario-form .form-group label {
+  display: block;
+
+  margin: 0;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.funcionario-form .form-group input,
+.funcionario-form .form-group select {
+  display: block;
+
+  width: 100%;
+  height: 46px;
+
+  padding: 0 14px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
+
+.funcionario-form .form-group input::placeholder {
+  color: inherit;
+
+  opacity: 0.5;
+}
+
+/* =========================================================
+   FOCO
+   ========================================================= */
+
+.funcionario-form .form-group input:focus,
+.funcionario-form .form-group select:focus {
+  border-color: #4f8cff;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.12);
+}
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+.funcionario-form input[type="date"] {
+  cursor: pointer;
+}
+
+/* =========================================================
+   AÇÕES DO FORMULÁRIO
+   ========================================================= */
+
+.funcionario-form .form-actions {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 10px;
+
+  padding-top: 20px;
+
+  box-sizing: border-box;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.funcionario-form .form-actions .btn {
+  min-height: 42px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   RESPONSIVO - LISTA
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .funcionario-card {
+    grid-template-columns:
+      55px
+      1fr
+      auto;
+
+    gap: 12px;
+  }
+
+  .funcionario-id {
+    display: none;
+  }
+
+  .funcionario-avatar {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .funcionario-info {
+    grid-column: 2;
+  }
+
+  .funcionario-status {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .funcionario-acoes {
+    grid-column: 2 / span 2;
+
+    justify-content: flex-start;
+  }
+}
+
+/* =========================================================
+   RESPONSIVO - FORMULÁRIO
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .funcionario-form {
+    padding: 22px;
+  }
+
+  .funcionario-form .form-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .funcionario-form .form-actions .btn {
+    width: 100%;
+
+    text-align: center;
+  }
+}
+
+/* =========================================================
+   RESPONSIVO - CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .funcionarios-container .page-header {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .funcionarios-container .page-header .btn {
+    width: 100%;
+
+    text-align: center;
+  }
+
+  .funcionario-card {
+    grid-template-columns:
+      50px
+      1fr;
+  }
+
+  .funcionario-status {
+    grid-column: 2;
+
+    justify-content: flex-start;
+  }
+
+  .funcionario-acoes {
+    grid-column: 1 / -1;
+  }
+}
+
+/* =========================================================
+   CELULAR PEQUENO
+   ========================================================= */
+
+@media (max-width: 450px) {
+  .funcionario-form {
+    padding: 16px;
+  }
+
+  .funcionario-form form {
+    gap: 16px;
+  }
+
+  .funcionario-form .form-group input,
+  .funcionario-form .form-group select {
+    height: 44px;
+  }
+}

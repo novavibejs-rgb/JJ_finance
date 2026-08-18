@@ -1,119 +1,119 @@
-{% extends "layout/base.html" %} {% block titulo %} Novo Funcionário {% endblock
-%} {% block conteudo %}
+{% extends "layout/base.html" %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/funcionarios.css') }}"
+/>
+{% endblock %} {% block titulo %} Novo Funcionário {% endblock %} {% block
+conteudo %}
 
-<div class="page-header">
-  <div>
-    <h1>➕ Novo Funcionário</h1>
-    <p>Cadastre um novo funcionário na empresa.</p>
+<div class="funcionarios-container">
+  <!-- =========================================================
+         CABEÇALHO
+    ========================================================== -->
+
+  <div class="page-header">
+    <div>
+      <h1>➕ Novo Funcionário</h1>
+      <p>Cadastre um novo funcionário na empresa.</p>
+    </div>
+
+    <a class="btn btn-secondary" href="{{ url_for('funcionarios.index') }}">
+      ← Voltar
+    </a>
   </div>
 
-  <a class="btn btn-secondary" href="{{ url_for('funcionarios.index') }}">
-    ← Voltar
-  </a>
-</div>
+  <!-- =========================================================
+         FORMULÁRIO
+    ========================================================== -->
 
-<!-- =========================================================
-     FORMULÁRIO
-========================================================= -->
+  <div class="card funcionario-form">
+    <form method="POST">
+      <!-- =================================================
+                 NOME
+            ================================================== -->
 
-<div class="card funcionario-form">
-  <form method="POST">
-    <!-- =================================================
-             NOME
-        ================================================== -->
+      <div class="form-group">
+        <label for="nome"> Nome completo </label>
 
-    <div class="form-group">
-      <label for="nome"> Nome completo </label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Digite o nome do funcionário"
+          required
+        />
+      </div>
 
-      <input
-        type="text"
-        id="nome"
-        name="nome"
-        placeholder="Digite o nome do funcionário"
-        required
-      />
-    </div>
+      <!-- =================================================
+                 CARGO
+            ================================================== -->
 
-    <!-- =================================================
-             CARGO
-        ================================================== -->
+      <div class="form-group">
+        <label for="cargo"> Cargo </label>
 
-    <div class="form-group">
-      <label for="cargo"> Cargo </label>
+        <input
+          type="text"
+          id="cargo"
+          name="cargo"
+          placeholder="Ex.: Gerente, Atendente, Auxiliar..."
+        />
+      </div>
 
-      <input
-        type="text"
-        id="cargo"
-        name="cargo"
-        placeholder="Ex.: Gerente, Atendente, Auxiliar..."
-      />
-    </div>
+      <!-- =================================================
+                 E-MAIL
+            ================================================== -->
 
-    <!-- =================================================
-             E-MAIL
-        ================================================== -->
+      <div class="form-group">
+        <label for="email"> E-mail </label>
 
-    <div class="form-group">
-      <label for="email"> E-mail </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Digite o e-mail"
+        />
+      </div>
 
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Digite o e-mail"
-      />
-    </div>
+      <!-- =================================================
+                 TELEFONE
+            ================================================== -->
 
-    <!-- =================================================
-             TELEFONE
-        ================================================== -->
+      <div class="form-group">
+        <label for="telefone"> Telefone </label>
 
-    <div class="form-group">
-      <label for="telefone"> Telefone </label>
+        <input
+          type="text"
+          id="telefone"
+          name="telefone"
+          placeholder="(00) 00000-0000"
+        />
+      </div>
 
-      <input
-        type="text"
-        id="telefone"
-        name="telefone"
-        placeholder="(00) 00000-0000"
-      />
-    </div>
+      <!-- =================================================
+                 DATA DE ADMISSÃO
+            ================================================== -->
 
-    <!-- =================================================
-             DATA DE ADMISSÃO
-        ================================================== -->
+      <div class="form-group">
+        <label for="data_admissao"> Data de admissão </label>
 
-    <div class="form-group">
-      <label for="data_admissao"> Data de admissão </label>
+        <input type="date" id="data_admissao" name="data_admissao" />
+      </div>
 
-      <input type="date" id="data_admissao" name="data_admissao" />
-    </div>
+      <!-- =================================================
+                 AÇÕES
+            ================================================== -->
 
-    <!-- =================================================
-             STATUS
-        ==================================================
+      <div class="form-actions">
+        <a class="btn btn-secondary" href="{{ url_for('funcionarios.index') }}">
+          Cancelar
+        </a>
 
-             NÃO COLOCAMOS STATUS AQUI.
-
-             O funcionário sempre começa como OFFLINE.
-             O sistema será responsável por controlar
-             esse campo futuramente.
-        -->
-
-    <!-- =================================================
-             AÇÕES
-        ================================================== -->
-
-    <div class="form-actions">
-      <a class="btn btn-secondary" href="{{ url_for('funcionarios.index') }}">
-        Cancelar
-      </a>
-
-      <button type="submit" class="btn btn-primary">
-        💾 Salvar Funcionário
-      </button>
-    </div>
-  </form>
+        <button type="submit" class="btn btn-primary">
+          💾 Salvar Funcionário
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 {% endblock %}
