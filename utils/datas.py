@@ -41,3 +41,32 @@ def fim_semana():
     Retorna o fim da semana.
     """
     return intervalo_semana_dt()[1]
+
+
+def formatar_data(data):
+    """
+    Formata a data vinda do banco.
+
+    Banco:
+        2026-07-23 22:32:03
+
+    Exibição:
+        23/07/2026
+    """
+
+    if not data:
+        return ""
+
+    if isinstance(data, datetime):
+        return data.strftime("%d/%m/%Y")
+
+    try:
+        data = datetime.strptime(
+            str(data),
+            "%Y-%m-%d %H:%M:%S"
+        )
+
+        return data.strftime("%d/%m/%Y")
+
+    except ValueError:
+        return str(data)

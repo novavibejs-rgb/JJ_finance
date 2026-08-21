@@ -14,28 +14,48 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f5f7fa;
+
+  background:
+    radial-gradient(circle at 0% 0%, rgba(14, 54, 163, 0.1), transparent 30%),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(21, 85, 214, 0.07),
+      transparent 30%
+    ),
+    #f4f7fb;
+
   color: #1f2937;
 
   overflow-x: hidden;
 }
 
 /* =========================================================
-   NAVBAR
+   NAVBAR - DESKTOP
    ========================================================= */
 
 .navbar {
   width: 100%;
   min-height: 70px;
+
   padding: 0 30px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  background-color: #0e36a3;
+  background: linear-gradient(135deg, #071d5c 0%, #0e36a3 55%, #1555d6 100%);
+
   color: #ffffff;
+
+  box-shadow: 0 4px 20px rgba(7, 29, 92, 0.22);
+
+  position: relative;
+  z-index: 1000;
 }
+
+/* =========================================================
+   LOGO NAVBAR
+   ========================================================= */
 
 .navbar-logo {
   display: flex;
@@ -46,6 +66,8 @@ body {
 .logo-principal {
   font-size: 24px;
   font-weight: 700;
+
+  letter-spacing: 0.5px;
 }
 
 .logo-nome {
@@ -55,19 +77,21 @@ body {
 
 .navbar-subtitulo {
   font-size: 14px;
+  opacity: 0.85;
 }
 
 /* =========================================================
    CONTAINER PRINCIPAL
-   IMPORTANTE:
-   Não usar .container porque o Bootstrap já usa essa classe.
    ========================================================= */
 
 .app-container {
   display: flex;
+
   width: 100%;
   max-width: 100%;
   min-width: 0;
+
+  min-height: calc(100vh - 70px);
 }
 
 /* =========================================================
@@ -78,34 +102,52 @@ body {
   width: 250px;
   min-width: 250px;
 
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.96);
 
-  border-right: 1px solid #ddd;
+  border-right: 1px solid rgba(14, 54, 163, 0.08);
 
-  padding: 40px 35px 30px;
+  padding: 40px 25px 30px;
 
   display: flex;
   flex-direction: column;
 
   min-height: calc(100vh - 70px);
+
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.04);
+
+  backdrop-filter: blur(10px);
 }
 
 /* =========================================================
-   LOGO SIDEBAR
+   LOGO DO MENU
    ========================================================= */
 
 .sidebar-logo {
-  padding-bottom: 30px;
+  padding: 5px 5px 25px;
 
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(14, 54, 163, 0.08);
 }
 
 .sidebar-logo h3 {
+  margin: 0;
+
   color: #0e36a3;
+
+  font-size: 22px;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
 }
 
 .sidebar-logo small {
-  color: #777;
+  display: block;
+
+  margin-top: 4px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* =========================================================
@@ -114,7 +156,6 @@ body {
 
 .sidebar-menu {
   display: flex;
-
   flex-direction: column;
 
   margin-top: 30px;
@@ -127,29 +168,37 @@ body {
 }
 
 .menu-item {
+  display: block;
+
   text-decoration: none;
 
-  color: #444;
+  color: #4b5563;
 
-  padding: 12px 15px;
+  padding: 13px 16px;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
-  transition: 0.2s;
-
-  display: block;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .menu-item:hover {
   background: #edf3ff;
 
   color: #0e36a3;
+
+  transform: translateX(3px);
 }
 
 .menu-item.active {
-  background: #0e36a3;
+  background: linear-gradient(135deg, #0e36a3, #1555d6);
 
-  color: white;
+  color: #ffffff;
+
+  box-shadow: 0 6px 15px rgba(14, 54, 163, 0.2);
 }
 
 /* =========================================================
@@ -161,7 +210,7 @@ body {
 
   padding-top: 30px;
 
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(14, 54, 163, 0.08);
 
   color: #999;
 }
@@ -171,24 +220,51 @@ body {
    ========================================================= */
 
 .conteudo {
+  flex: 1;
+
   min-width: 0;
   max-width: 100%;
+
+  padding: 30px;
+
+  background: transparent;
 }
 
 /* =========================================================
-   BOTÃO MOBILE
+   TÍTULOS
    ========================================================= */
+
+.conteudo h1,
+.conteudo h2,
+.conteudo h3 {
+  color: #172033;
+}
+
+.conteudo h1,
+.conteudo h2 {
+  font-weight: 700;
+}
+
+/* =========================================================
+   BOTÃO MENU MOBILE
+   ========================================================= */
+
+.mobile-menu-container {
+  display: none;
+}
+
 .mobile-menu-btn {
   display: none;
-
-  border: none;
-  border-radius: 10px;
 
   width: 45px;
   height: 45px;
 
-  background: #05da45;
-  color: white;
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #b60f7e, #1555d6);
+
+  color: #ffffff;
 
   font-size: 24px;
   line-height: 1;
@@ -196,6 +272,30 @@ body {
   cursor: pointer;
 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  transform: scale(1.05);
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.mobile-menu-btn:active {
+  transform: scale(0.96);
+}
+
+/* =========================================================
+   TRANSIÇÕES
+   ========================================================= */
+
+.sidebar,
+.menu-item,
+.mobile-menu-btn {
+  transition: all 0.25s ease;
 }
 
 /* =========================================================
@@ -220,34 +320,101 @@ body {
    ========================================================= */
 
 @media (max-width: 768px) {
-  /* -----------------------------------------
-     NAVBAR
-     ----------------------------------------- */
+  /* ---------------------------------------------------------
+     NAVBAR MOBILE
+     --------------------------------------------------------- */
 
   .navbar {
+    width: 100%;
+
     min-height: 60px;
 
-    padding: 0 15px 0 75px;
+    padding: 0 15px;
+
+    display: flex;
+    align-items: center;
+
+    justify-content: flex-end;
 
     position: relative;
+
     z-index: 1000;
+  }
+
+  /* ---------------------------------------------------------
+     LOGO J&J - LADO DIREITO
+     --------------------------------------------------------- */
+
+  .navbar-logo {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
   }
 
   .logo-principal {
     font-size: 20px;
   }
 
-  .logo-nome {
-    display: none;
-  }
-
+  .logo-nome,
   .navbar-subtitulo {
     display: none;
   }
 
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
+     CONTAINER DO BOTÃO + TEXTO MENU
+     --------------------------------------------------------- */
+
+  .mobile-menu-container {
+    position: absolute;
+
+    left: 15px;
+    top: 8px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    z-index: 1001;
+  }
+
+  /* ---------------------------------------------------------
+     BOTÃO MENU
+     --------------------------------------------------------- */
+
+  .mobile-menu-btn {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: static;
+
+    width: 45px;
+    height: 45px;
+  }
+
+  /* ---------------------------------------------------------
+     TEXTO MENU
+     --------------------------------------------------------- */
+
+  .mobile-menu-text {
+    display: block;
+
+    color: #efeff1;
+
+    font-size: 27px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    white-space: nowrap;
+  }
+
+  /* ---------------------------------------------------------
      CONTAINER
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .app-container {
     display: block;
@@ -257,9 +424,9 @@ body {
     min-height: calc(100vh - 60px);
   }
 
-  /* -----------------------------------------
-     SIDEBAR
-     ----------------------------------------- */
+  /* ---------------------------------------------------------
+     SIDEBAR MOBILE
+     --------------------------------------------------------- */
 
   .sidebar {
     position: fixed;
@@ -271,6 +438,7 @@ body {
     min-width: 260px;
 
     height: calc(100vh - 60px);
+
     min-height: 0;
 
     padding: 25px 20px;
@@ -282,34 +450,21 @@ body {
     transition: left 0.25s ease;
 
     overflow-y: auto;
+
+    backdrop-filter: blur(15px);
   }
 
-  /* MENU ABERTO */
+  /* ---------------------------------------------------------
+     MENU ABERTO
+     --------------------------------------------------------- */
 
   .sidebar.mobile-open {
     left: 0;
   }
 
-  /* -----------------------------------------
-     BOTÃO MENU
-     ----------------------------------------- */
-
-  .mobile-menu-btn {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-
-    left: 15px;
-    top: 8px;
-
-    z-index: 1001;
-  }
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      CONTEÚDO
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .conteudo {
     width: 100%;
@@ -324,9 +479,9 @@ body {
     overflow-x: hidden;
   }
 
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      TÍTULOS
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .conteudo h1 {
     font-size: 32px;
@@ -344,19 +499,9 @@ body {
     font-size: 22px;
   }
 
-  /* -----------------------------------------
-     BOTÕES
-     ----------------------------------------- */
-
-  .conteudo .btn {
-    max-width: 100%;
-
-    white-space: normal;
-  }
-
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      INPUTS
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .conteudo input,
   .conteudo select,
@@ -364,9 +509,9 @@ body {
     max-width: 100%;
   }
 
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      TABELAS
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .conteudo table {
     width: 100%;
@@ -390,7 +535,15 @@ body {
     font-size: 24px;
   }
 
-  .mobile-menu-btn {
+  .mobile-menu-container {
     left: 10px;
+  }
+
+  .navbar {
+    padding: 0 12px;
+  }
+
+  .logo-principal {
+    font-size: 19px;
   }
 }

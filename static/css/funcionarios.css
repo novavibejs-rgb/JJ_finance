@@ -1,14 +1,22 @@
 /* =========================================================
+   J&J FINANCE
    FUNCIONÁRIOS
+   ========================================================= */
+
+/* =========================================================
+   CONTAINER PRINCIPAL
    ========================================================= */
 
 .funcionarios-container {
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
   box-sizing: border-box;
 }
 
 /* =========================================================
-   CABEÇALHO
+   CABEÇALHO DA PÁGINA
    ========================================================= */
 
 .funcionarios-container .page-header {
@@ -19,7 +27,7 @@
   justify-content: space-between;
 
   gap: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 
   box-sizing: border-box;
 }
@@ -34,34 +42,52 @@
 }
 
 /* =========================================================
-   PESQUISA
+   ÁREA DE PESQUISA
    ========================================================= */
 
 .funcionarios-search {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+
+  box-sizing: border-box;
 }
 
 .funcionarios-search input {
-  width: 100%;
-  box-sizing: border-box;
+  display: block;
 
-  padding: 13px 16px;
+  width: 100%;
+  height: 44px;
+
+  padding: 0 16px;
+
+  box-sizing: border-box;
 
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
 
   background: rgba(255, 255, 255, 0.04);
-
   color: inherit;
+
+  font-family: inherit;
+  font-size: 14px;
 
   outline: none;
 
-  transition: 0.2s;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.funcionarios-search input::placeholder {
+  color: inherit;
+  opacity: 0.5;
 }
 
 .funcionarios-search input:focus {
   border-color: #4f8cff;
+
+  background: rgba(255, 255, 255, 0.06);
 
   box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.12);
 }
@@ -71,6 +97,8 @@
    ========================================================= */
 
 .funcionarios-lista {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
 
@@ -82,6 +110,8 @@
    ========================================================= */
 
 .funcionario-card {
+  width: 100%;
+
   display: grid;
 
   grid-template-columns:
@@ -124,7 +154,6 @@
 
 .funcionario-id {
   font-size: 12px;
-
   font-weight: 700;
 
   opacity: 0.55;
@@ -141,7 +170,6 @@
   height: 48px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -150,6 +178,8 @@
   background: rgba(79, 140, 255, 0.12);
 
   font-size: 23px;
+
+  flex-shrink: 0;
 }
 
 /* =========================================================
@@ -166,9 +196,7 @@
   font-size: 16px;
 
   white-space: nowrap;
-
   overflow: hidden;
-
   text-overflow: ellipsis;
 }
 
@@ -180,15 +208,12 @@
   opacity: 0.7;
 
   white-space: nowrap;
-
   overflow: hidden;
-
   text-overflow: ellipsis;
 }
 
 .funcionario-info small {
   font-size: 12px;
-
   opacity: 0.6;
 }
 
@@ -198,14 +223,14 @@
 
 .funcionario-status {
   display: flex;
-
+  align-items: center;
   justify-content: center;
 }
 
 .funcionario-status .badge {
   display: inline-flex;
-
   align-items: center;
+  justify-content: center;
 
   padding: 6px 10px;
 
@@ -225,35 +250,25 @@
 }
 
 /* =========================================================
-   AÇÕES
+   AÇÕES DO FUNCIONÁRIO
    ========================================================= */
 
 .funcionario-acoes {
   display: flex;
-
   align-items: center;
-
   justify-content: flex-end;
 
-  gap: 7px;
+  gap: 8px;
 }
 
 .funcionario-acoes .btn {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
 
   padding: 0;
 
   border-radius: 9px;
-
-  text-decoration: none;
-
-  transition: 0.2s;
 }
 
 .funcionario-acoes .btn:hover {
@@ -266,11 +281,9 @@
 
 .nenhum-funcionario {
   display: flex;
-
   flex-direction: column;
 
   align-items: center;
-
   justify-content: center;
 
   text-align: center;
@@ -278,10 +291,11 @@
   padding: 60px 20px;
 
   border: 1px dashed rgba(255, 255, 255, 0.12);
-
   border-radius: 15px;
 
   background: rgba(255, 255, 255, 0.02);
+
+  box-sizing: border-box;
 }
 
 .nenhum-funcionario .funcionario-avatar {
@@ -307,7 +321,6 @@
   max-width: 800px;
 
   margin: 0 auto;
-
   padding: 30px;
 
   box-sizing: border-box;
@@ -315,15 +328,10 @@
   overflow: hidden;
 }
 
-/* =========================================================
-   FORM
-   ========================================================= */
-
 .funcionario-form form {
   width: 100%;
 
   display: flex;
-
   flex-direction: column;
 
   gap: 20px;
@@ -332,14 +340,13 @@
 }
 
 /* =========================================================
-   GRUPO DO CAMPO
+   GRUPO DO FORMULÁRIO
    ========================================================= */
 
 .funcionario-form .form-group {
   width: 100%;
 
   display: flex;
-
   flex-direction: column;
 
   gap: 8px;
@@ -357,12 +364,11 @@
   margin: 0;
 
   font-size: 13px;
-
   font-weight: 600;
 }
 
 /* =========================================================
-   INPUT
+   INPUT / SELECT
    ========================================================= */
 
 .funcionario-form .form-group input,
@@ -377,15 +383,12 @@
   box-sizing: border-box;
 
   border: 1px solid rgba(255, 255, 255, 0.1);
-
   border-radius: 10px;
 
   background: rgba(255, 255, 255, 0.04);
-
   color: inherit;
 
   font-family: inherit;
-
   font-size: 14px;
 
   outline: none;
@@ -396,19 +399,10 @@
     background 0.2s ease;
 }
 
-/* =========================================================
-   PLACEHOLDER
-   ========================================================= */
-
 .funcionario-form .form-group input::placeholder {
   color: inherit;
-
   opacity: 0.5;
 }
-
-/* =========================================================
-   FOCO
-   ========================================================= */
 
 .funcionario-form .form-group input:focus,
 .funcionario-form .form-group select:focus {
@@ -420,7 +414,7 @@
 }
 
 /* =========================================================
-   DATA
+   CAMPO DATA
    ========================================================= */
 
 .funcionario-form input[type="date"] {
@@ -435,15 +429,12 @@
   width: 100%;
 
   display: flex;
-
   align-items: center;
-
   justify-content: flex-end;
 
   gap: 10px;
 
   margin-top: 10px;
-
   padding-top: 20px;
 
   box-sizing: border-box;
@@ -451,18 +442,12 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* =========================================================
-   BOTÕES
-   ========================================================= */
-
 .funcionario-form .form-actions .btn {
   min-height: 42px;
-
-  box-sizing: border-box;
 }
 
 /* =========================================================
-   RESPONSIVO - LISTA
+   TABLET
    ========================================================= */
 
 @media (max-width: 900px) {
@@ -501,48 +486,70 @@
 }
 
 /* =========================================================
-   RESPONSIVO - FORMULÁRIO
+   CELULAR
    ========================================================= */
 
 @media (max-width: 700px) {
+  .funcionarios-container {
+    padding: 15px;
+  }
+
+  .funcionarios-container .page-header {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 15px;
+  }
+
+  .funcionarios-container .page-header .btn {
+    width: 100%;
+  }
+
   .funcionario-form {
     padding: 22px;
   }
 
   .funcionario-form .form-actions {
     flex-direction: column;
-
     align-items: stretch;
   }
 
   .funcionario-form .form-actions .btn {
     width: 100%;
-
-    text-align: center;
   }
 }
 
 /* =========================================================
-   RESPONSIVO - CELULAR
+   CELULAR PEQUENO
    ========================================================= */
 
 @media (max-width: 600px) {
-  .funcionarios-container .page-header {
-    flex-direction: column;
-
-    align-items: stretch;
+  .funcionarios-search {
+    margin-bottom: 15px;
   }
 
-  .funcionarios-container .page-header .btn {
-    width: 100%;
-
-    text-align: center;
+  .funcionarios-search input {
+    height: 46px;
+    font-size: 15px;
   }
 
   .funcionario-card {
     grid-template-columns:
       50px
       1fr;
+
+    gap: 10px 12px;
+
+    padding: 14px;
+  }
+
+  .funcionario-avatar {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .funcionario-info {
+    grid-column: 2;
   }
 
   .funcionario-status {
@@ -553,14 +560,22 @@
 
   .funcionario-acoes {
     grid-column: 1 / -1;
+
+    justify-content: flex-start;
+
+    padding-top: 5px;
   }
 }
 
 /* =========================================================
-   CELULAR PEQUENO
+   CELULAR MUITO PEQUENO
    ========================================================= */
 
 @media (max-width: 450px) {
+  .funcionarios-container {
+    padding: 12px;
+  }
+
   .funcionario-form {
     padding: 16px;
   }
@@ -572,5 +587,10 @@
   .funcionario-form .form-group input,
   .funcionario-form .form-group select {
     height: 44px;
+  }
+
+  .funcionario-acoes .btn {
+    width: 42px;
+    height: 42px;
   }
 }

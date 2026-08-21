@@ -42,15 +42,18 @@
   <body>
     {% include "layout/navbar.html" %}
 
-    <!-- BOTÃO DO MENU NO CELULAR -->
-    <button
-      class="mobile-menu-btn"
-      id="mobileMenuBtn"
-      type="button"
-      aria-label="Abrir menu"
-    >
-      ☰
-    </button>
+    <div class="mobile-menu-container">
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        type="button"
+        aria-label="Abrir menu"
+      >
+        ☰
+      </button>
+
+      <span class="mobile-menu-text">Menu</span>
+    </div>
 
     <main class="app-container">
       {% include "layout/sidebar.html" %}
@@ -62,8 +65,30 @@
       const mobileMenuBtn = document.getElementById("mobileMenuBtn");
       const sidebar = document.querySelector(".sidebar");
 
-      mobileMenuBtn.addEventListener("click", function () {
+      mobileMenuBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+
         sidebar.classList.toggle("mobile-open");
+      });
+
+      // Fecha o menu ao clicar fora
+      document.addEventListener("click", function (event) {
+        if (!sidebar.classList.contains("mobile-open")) {
+          return;
+        }
+
+        // Se clicou dentro do menu, não fecha
+        if (sidebar.contains(event.target)) {
+          return;
+        }
+
+        // Se clicou no botão Menu, não fecha
+        if (mobileMenuBtn.contains(event.target)) {
+          return;
+        }
+
+        // Clique fora → fecha
+        sidebar.classList.remove("mobile-open");
       });
     </script>
 

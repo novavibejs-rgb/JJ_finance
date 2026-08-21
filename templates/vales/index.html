@@ -1,0 +1,171 @@
+{% extends "layout/base.html" %} {% block titulo %}Vales{% endblock %} {% block
+css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/vales.css') }}"
+/>
+{% endblock %} {% block conteudo %}
+
+<!-- CABEÇALHO -->
+
+<div class="pagina-cabecalho">
+  <div>
+    <h1>💰 Vales</h1>
+
+    <p>Controle de vales de sócios e funcionários</p>
+  </div>
+
+  <a href="{{ url_for('vales.novo') }}" class="btn btn-primary">
+    ➕ Novo Vale
+  </a>
+</div>
+
+<!-- PESQUISA -->
+
+<div class="vale-pesquisa">
+  <form method="GET" action="{{ url_for('vales.index') }}">
+    <div class="campo-pesquisa">
+      <span>🔎</span>
+
+      <input
+        type="search"
+        name="pesquisa"
+        value="{{ pesquisa }}"
+        placeholder="Pesquisar por nome ou ID da pessoa..."
+        autocomplete="off"
+      />
+    </div>
+
+    {% if pesquisa %}
+
+    <a href="{{ url_for('vales.index') }}" class="btn btn-secondary">
+      ✕ Limpar
+    </a>
+
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">🔎 Pesquisar</button>
+  </form>
+</div>
+
+<!-- LISTA -->
+
+<div class="tabela-vales-wrapper">
+  <table class="table tabela-vales">
+    <thead>
+      <tr>
+        <th>ID</th>
+
+        <th>Pessoa</th>
+
+        <th>Tipo</th>
+
+        <th>Data</th>
+
+        <th>Valor</th>
+
+        <th>Descrição</th>
+
+        <th>Semana</th>
+
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for vale in vales %}
+
+      <tr>
+        <!-- ID DA PESSOA -->
+
+        <td>
+          <strong> {{ vale[1] }} </strong>
+        </td>
+
+        <!-- PESSOA -->
+
+        <td>
+          <strong> {{ vale[3] or "Pessoa não encontrada" }} </strong>
+        </td>
+
+        <!-- TIPO -->
+
+        <td>
+          {% if vale[2] == "socio" %}
+
+          <span class="tipo-vale tipo-socio"> 👤 Sócio </span>
+
+          {% elif vale[2] == "funcionario" %}
+
+          <span class="tipo-vale tipo-funcionario"> 👷 Funcionário </span>
+
+          {% else %}
+
+          <span class="tipo-vale"> - </span>
+
+          {% endif %}
+        </td>
+
+        <!-- DATA -->
+
+        <td>{{ vale[8] or "-" }}</td>
+
+        <!-- VALOR -->
+
+        <td>
+          <strong class="valor-vale">
+            R$ {{ "%.2f"|format(vale[4]|float) }}
+          </strong>
+        </td>
+
+        <!-- DESCRIÇÃO -->
+
+        <td>{{ vale[5] or "-" }}</td>
+
+        <!-- SEMANA -->
+
+        <td>
+          <span class="semana-vale">
+            {{ vale[6] or "-" }} até {{ vale[7] or "-" }}
+          </span>
+        </td>
+
+        <!-- AÇÕES -->
+
+        <td>
+          <div class="acoes-vale">
+            <a
+              href="{{ url_for('vales.editar', id=vale[0]) }}"
+              class="btn btn-warning"
+            >
+              ✏ Editar
+            </a>
+
+            <a
+              href="{{ url_for('vales.excluir', id=vale[0]) }}"
+              class="btn btn-danger"
+              onclick="return confirm('Deseja realmente excluir este vale?');"
+            >
+              🗑 Excluir
+            </a>
+          </div>
+        </td>
+      </tr>
+
+      {% else %}
+
+      <tr>
+        <td colspan="8" class="text-center">
+          {% if pesquisa %} Nenhum vale encontrado para:
+          <strong>{{ pesquisa }}</strong>
+
+          {% else %} Nenhum vale cadastrado. {% endif %}
+        </td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

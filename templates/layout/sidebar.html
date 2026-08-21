@@ -1,30 +1,60 @@
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <h3>J&J Finance</h3>
-
-    <small>Sistema Financeiro</small>
+    <h3>IRMAOS J</h3>
+    <small>construçao e reformas</small>
   </div>
 
   <nav class="sidebar-menu">
-    <a href="{{ url_for('dashboard.index') }}" class="menu-item active">
-      🏠 Dashboard
+    <!-- DASHBOARD -->
+    <a
+      href="{{ url_for('dashboard.index') }}"
+      class="menu-item {% if request.endpoint == 'dashboard.index' %}active{% endif %}"
+    >
+      📳 Dashboard
     </a>
 
-    <a href="{{ url_for('socios.index') }}" class="menu-item"> 👥 Sócios </a>
+    <!-- SÓCIOS -->
+    <a
+      href="{{ url_for('socios.index') }}"
+      class="menu-item {% if request.endpoint == 'socios.index' %}active{% endif %}"
+    >
+      👥 Sócios
+    </a>
 
-    <a href="{{ url_for('funcionarios.index') }}" class="menu-item">
+    <!-- FUNCIONÁRIOS -->
+    <a
+      href="{{ url_for('funcionarios.index') }}"
+      class="menu-item {% if request.endpoint == 'funcionarios.index' %}active{% endif %}"
+    >
       👥 Funcionários
     </a>
 
-    <a href="{{ url_for('despesas.index') }}" class="menu-item">
+    <!-- DESPESAS -->
+    <a
+      href="{{ url_for('despesas.index') }}"
+      class="menu-item {% if request.endpoint == 'despesas.index' %}active{% endif %}"
+    >
       🗃 Despesas
     </a>
 
-    <a href="#" class="menu-item"> 🛠 Serviços </a>
+    <!-- SERVIÇOS -->
+    <a
+      href="{{ url_for('servicos.index') }}"
+      class="menu-item {% if request.endpoint == 'servicos.index' %}active{% endif %}"
+    >
+      🛠 Serviços
+    </a>
 
-    <a href="#" class="menu-item"> 💰 Vales </a>
+    <!-- VALES -->
+    <a
+      href="{{ url_for('vales.index') }}"
+      class="menu-item {% if request.endpoint == 'vales.index' %}active{% endif %}"
+    >
+      💰 Vales
+    </a>
 
-    <a href="#" class="menu-item"> ⚙ Configurações </a>
+    <!-- CONFIGURAÇÕES -->
+    <a href="#" class="menu-item"> ⚙️ Configurações </a>
   </nav>
 
   <div class="sidebar-footer">

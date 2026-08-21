@@ -1,0 +1,78 @@
+{% extends "layout/base.html" %} {% block titulo %} Serviços {% endblock %} {%
+block conteudo %} {% block css %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/servicos.css') }}"
+/>
+
+{% endblock %}
+
+<h1>Serviços</h1>
+
+<a class="btn btn-primary" href="{{ url_for('servicos.novo') }}">
+  ➕ Novo Serviço
+</a>
+
+<br /><br />
+
+<div class="tabela-servicos-wrapper">
+  <table class="table tabela-servicos">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Cliente</th>
+        <th>Serviço</th>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Pagamento</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for servico in servicos %}
+
+      <tr>
+        <td>{{ servico[6] | data }}</td>
+
+        <td>{{ servico[1] }}</td>
+
+        <td>{{ servico[2] }}</td>
+
+        <td>{{ servico[3] or "-" }}</td>
+
+        <td>R$ {{ "%.2f"|format(servico[4]|float) }}</td>
+
+        <td>{{ servico[5] or "-" }}</td>
+
+        <td>
+          <a
+            class="btn btn-warning"
+            href="{{ url_for('servicos.editar', id=servico[0]) }}"
+          >
+            ✏ Editar
+          </a>
+
+          <a
+            class="btn btn-danger"
+            href="{{ url_for('servicos.excluir', id=servico[0]) }}"
+            onclick="return confirm('Deseja realmente excluir este serviço?');"
+          >
+            🗑 Excluir
+          </a>
+        </td>
+      </tr>
+
+      {% else %}
+
+      <tr>
+        <td colspan="7" class="text-center">Nenhum serviço cadastrado.</td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
