@@ -74,6 +74,19 @@ def criar_tabelas():
         data_admissao TEXT
     )
     """)
+    
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS usuarios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        usuario TEXT NOT NULL UNIQUE,
+        senha TEXT NOT NULL,
+        nivel TEXT NOT NULL DEFAULT 'admin',
+        ativo INTEGER NOT NULL DEFAULT 1,
+        data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
 
 
     conn.commit()

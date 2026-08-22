@@ -5,7 +5,6 @@ from banco import socios
 from banco import fucionarios as funcionarios
 
 from utils.datas import intervalo_semana_dt
-
 from utils.datas import intervalo_semana_dt
 
     

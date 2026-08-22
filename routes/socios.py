@@ -9,6 +9,7 @@ from flask import (
 from banco import socios
 
 
+
 socios_bp = Blueprint("socios", __name__)
 
 

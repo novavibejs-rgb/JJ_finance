@@ -1,9 +1,11 @@
 <aside class="sidebar">
+  <!-- LOGO -->
   <div class="sidebar-logo">
-    <h3>IRMAOS J</h3>
-    <small>construçao e reformas</small>
+    <h3>IRMÃOS J</h3>
+    <small>Construção e Reformas</small>
   </div>
 
+  <!-- MENU -->
   <nav class="sidebar-menu">
     <!-- DASHBOARD -->
     <a
@@ -57,7 +59,26 @@
     <a href="#" class="menu-item"> ⚙️ Configurações </a>
   </nav>
 
+  <!-- USUÁRIO LOGADO -->
+  <div class="sidebar-user">
+    <div class="sidebar-user-avatar">👤</div>
+
+    <div class="sidebar-user-info">
+      <strong> {{ session.get("usuario_nome", "Usuário") }} </strong>
+
+      <small> {{ session.get("nivel", "usuário")|capitalize }} </small>
+    </div>
+  </div>
+
+  <!-- SAIR -->
+  <div class="sidebar-logout">
+    <a href="{{ url_for('auth.logout') }}" class="menu-item menu-item-logout">
+      🚪 Sair
+    </a>
+  </div>
+
+  <!-- RODAPÉ -->
   <div class="sidebar-footer">
-    <small>Versão 0.1.0</small>
+    <small>J&J Finance • Versão 0.1.0</small>
   </div>
 </aside>

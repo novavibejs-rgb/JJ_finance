@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
+
 from banco.fucionarios import (
     listar_funcionarios,
     buscar_funcionario_por_id,

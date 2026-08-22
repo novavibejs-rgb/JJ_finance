@@ -2,6 +2,9 @@ from flask import Blueprint, render_template, request, redirect, url_for
 
 from banco import despesas
 
+
+
+
 despesas_bp = Blueprint("despesas", __name__)
 
 
