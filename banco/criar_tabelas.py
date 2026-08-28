@@ -88,6 +88,18 @@ def criar_tabelas():
     )
     """)
 
+    
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS configuracao (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome_empresa TEXT NOT NULL,
+        telefone TEXT,
+        email TEXT,
+        endereco TEXT,
+        logo TEXT
+    )
+""")
+
 
     conn.commit()
     conn.close()

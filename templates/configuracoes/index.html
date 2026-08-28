@@ -1,0 +1,89 @@
+{% extends "layout/base.html" %} {% block titulo %} Configurações - J&J Finance
+{% endblock %} {% block conteudo %}
+
+<div class="container-fluid">
+  <div class="mb-4">
+    <h1>⚙️ Configurações</h1>
+    <p class="text-muted">Configure os dados da sua empresa.</p>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form method="POST">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nome_empresa" class="form-label">
+              Nome da empresa
+            </label>
+
+            <input
+              type="text"
+              class="form-control"
+              id="nome_empresa"
+              name="nome_empresa"
+              value="{{ configuracao['nome_empresa'] if configuracao else '' }}"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="telefone" class="form-label"> Telefone </label>
+
+            <input
+              type="text"
+              class="form-control"
+              id="telefone"
+              name="telefone"
+              value="{{ configuracao['telefone'] if configuracao else '' }}"
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label"> E-mail </label>
+
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              value="{{ configuracao['email'] if configuracao else '' }}"
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="endereco" class="form-label"> Endereço </label>
+
+            <input
+              type="text"
+              class="form-control"
+              id="endereco"
+              name="endereco"
+              value="{{ configuracao['endereco'] if configuracao else '' }}"
+            />
+          </div>
+
+          <div class="col-12 mb-4">
+            <label for="logo" class="form-label"> Logo </label>
+
+            <input
+              type="text"
+              class="form-control"
+              id="logo"
+              name="logo"
+              value="{{ configuracao['logo'] if configuracao else '' }}"
+              placeholder="Caminho ou nome da logo"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary">
+            💾 Salvar configurações
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
