@@ -1,89 +1,344 @@
-{% extends "layout/base.html" %} {% block titulo %} Configurações - J&J Finance
+{% extends "layout/base.html" %} {% block titulo %} Configurações {% endblock %}
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/configuracoes.css') }}"
+/>
 {% endblock %} {% block conteudo %}
 
-<div class="container-fluid">
-  <div class="mb-4">
-    <h1>⚙️ Configurações</h1>
-    <p class="text-muted">Configure os dados da sua empresa.</p>
+<div class="configuracoes-container">
+  <!-- =====================================================
+         CABEÇALHO
+         ===================================================== -->
+
+  <div class="configuracoes-cabecalho">
+    <button
+      type="button"
+      class="configuracao-seta"
+      id="configAnterior"
+      aria-label="Configuração anterior"
+    >
+      ❮
+    </button>
+
+    <div class="configuracoes-titulo">
+      <h1 id="configTitulo">Configurações</h1>
+
+      <span id="configIndicador"> Empresa </span>
+    </div>
+
+    <button
+      type="button"
+      class="configuracao-seta"
+      id="configProxima"
+      aria-label="Próxima configuração"
+    >
+      ❯
+    </button>
   </div>
 
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <form method="POST">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="nome_empresa" class="form-label">
-              Nome da empresa
-            </label>
+  <!-- =====================================================
+         SEÇÕES
+         ===================================================== -->
+
+  <div class="configuracao-secoes">
+    <!-- =================================================
+             EMPRESA
+             ================================================= -->
+
+    <section class="configuracao-secao ativa" data-config="empresa">
+      <h2>🏢 Configurações da Empresa</h2>
+
+      <p>Informações básicas da empresa.</p>
+
+      <div class="configuracao-conteudo">
+        <form method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="tipo_configuracao" value="empresa" />
+
+          <!-- NOME -->
+
+          <div class="form-group">
+            <label for="nome_empresa"> Nome da empresa </label>
 
             <input
               type="text"
-              class="form-control"
               id="nome_empresa"
               name="nome_empresa"
-              value="{{ configuracao['nome_empresa'] if configuracao else '' }}"
+              value="{{ configuracao.nome_empresa if configuracao else '' }}"
               required
             />
           </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="telefone" class="form-label"> Telefone </label>
+          <!-- TELEFONE -->
+
+          <div class="form-group">
+            <label for="telefone"> Telefone </label>
 
             <input
               type="text"
-              class="form-control"
               id="telefone"
               name="telefone"
-              value="{{ configuracao['telefone'] if configuracao else '' }}"
+              value="{{ configuracao.telefone if configuracao else '' }}"
             />
           </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="email" class="form-label"> E-mail </label>
+          <!-- E-MAIL -->
+
+          <div class="form-group">
+            <label for="email_empresa"> E-mail </label>
 
             <input
               type="email"
-              class="form-control"
-              id="email"
+              id="email_empresa"
               name="email"
-              value="{{ configuracao['email'] if configuracao else '' }}"
+              value="{{ configuracao.email if configuracao else '' }}"
             />
           </div>
 
-          <div class="col-md-6 mb-3">
-            <label for="endereco" class="form-label"> Endereço </label>
+          <!-- ENDEREÇO -->
+
+          <div class="form-group">
+            <label for="endereco"> Endereço </label>
 
             <input
               type="text"
-              class="form-control"
               id="endereco"
               name="endereco"
-              value="{{ configuracao['endereco'] if configuracao else '' }}"
+              value="{{ configuracao.endereco if configuracao else '' }}"
             />
           </div>
 
-          <div class="col-12 mb-4">
-            <label for="logo" class="form-label"> Logo </label>
+          <!-- LOGO -->
+
+          <div class="form-group">
+            <label for="logo"> Logo da empresa </label>
+
+            <input
+              type="file"
+              id="logo"
+              name="logo"
+              accept="image/png, image/jpeg, image/webp"
+            />
+          </div>
+
+          {% if configuracao and configuracao.logo %}
+
+          <div class="logo-preview">
+            <p>Logo atual:</p>
+
+            <img
+              src="{{ url_for('static', filename=configuracao.logo) }}"
+              alt="Logo da empresa"
+            />
+          </div>
+
+          {% endif %}
+
+          <button type="submit">💾 Salvar configuração</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- =================================================
+             E-MAIL
+             ================================================= -->
+
+    <section class="configuracao-secao" data-config="email">
+      <h2>📧 Configuração de E-mail</h2>
+
+      <p>Configure o servidor utilizado pelo sistema para envio de e-mails.</p>
+
+      <div class="configuracao-conteudo">
+        <!-- FORMULÁRIO PRINCIPAL -->
+
+        <form method="POST">
+          <input type="hidden" name="tipo_configuracao" value="email" />
+
+          <!-- SERVIDOR SMTP -->
+
+          <div class="form-group">
+            <label for="smtp_server"> Servidor SMTP </label>
 
             <input
               type="text"
-              class="form-control"
-              id="logo"
-              name="logo"
-              value="{{ configuracao['logo'] if configuracao else '' }}"
-              placeholder="Caminho ou nome da logo"
+              id="smtp_server"
+              name="smtp_server"
+              placeholder="smtp.gmail.com"
+              value="{{ email_config.smtp_server if email_config else '' }}"
+              required
             />
           </div>
+
+          <!-- PORTA -->
+
+          <div class="form-group">
+            <label for="smtp_port"> Porta SMTP </label>
+
+            <input
+              type="number"
+              id="smtp_port"
+              name="smtp_port"
+              value="{{ email_config.smtp_port if email_config else 587 }}"
+              required
+            />
+          </div>
+
+          <!-- E-MAIL -->
+
+          <div class="form-group">
+            <label for="email"> E-mail </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="seu@email.com"
+              value="{{ email_config.email if email_config else '' }}"
+              required
+            />
+          </div>
+
+          <!-- SENHA -->
+
+          <div class="form-group">
+            <label for="senha"> Senha de app </label>
+
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Senha de app do e-mail"
+              required
+            />
+          </div>
+
+          <!-- SALVAR -->
+
+          <button type="submit">💾 Salvar configuração</button>
+        </form>
+
+        <!-- RESULTADO -->
+
+        {% if mensagem_smtp %}
+
+        <div
+          class="resultado-smtp {% if sucesso_smtp %}sucesso{% else %}erro{% endif %}"
+        >
+          {{ mensagem_smtp }}
         </div>
 
-        <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary">
-            💾 Salvar configurações
-          </button>
+        {% endif %}
+
+        <!-- AÇÕES -->
+
+        <div class="acoes-email">
+          <!-- TESTAR CONEXÃO -->
+
+          <form method="POST">
+            <input
+              type="hidden"
+              name="tipo_configuracao"
+              value="testar_email"
+            />
+
+            <button type="submit" class="botao-acao-email">
+              <span class="icone-acao"> 🧪 </span>
+
+              <span> Testar conexão </span>
+            </button>
+          </form>
+
+          <!-- ENVIAR TESTE -->
+
+          <form method="POST">
+            <input
+              type="hidden"
+              name="tipo_configuracao"
+              value="enviar_email_teste"
+            />
+
+            <button type="submit" class="botao-acao-email">
+              <span class="icone-acao"> ✉️ </span>
+
+              <span> Enviar teste </span>
+            </button>
+          </form>
         </div>
-      </form>
-    </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+    <script>
+      const configuracaoAtiva = "{{ configuracao_ativa }}";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const secoes = document.querySelectorAll(".configuracao-secao");
+
+        const anterior = document.getElementById("configAnterior");
+
+        const proxima = document.getElementById("configProxima");
+
+        const indicador = document.getElementById("configIndicador");
+
+        const nomes = ["Empresa", "E-mail", "Sistema", "Aparência"];
+
+        let indiceAtual = 0;
+
+        /* CONFIGURAÇÃO INICIAL */
+
+        if (configuracaoAtiva === "empresa") {
+          indiceAtual = 0;
+        } else if (configuracaoAtiva === "email") {
+          indiceAtual = 1;
+        } else if (configuracaoAtiva === "sistema") {
+          indiceAtual = 2;
+        } else if (configuracaoAtiva === "aparencia") {
+          indiceAtual = 3;
+        }
+
+        /* MOSTRAR CONFIGURAÇÃO */
+
+        function mostrarConfiguracao(indice) {
+          secoes.forEach(function (secao, indiceSecao) {
+            secao.classList.toggle("ativa", indiceSecao === indice);
+          });
+
+          indicador.textContent = nomes[indice];
+        }
+
+        /* MOSTRAR INICIAL */
+
+        mostrarConfiguracao(indiceAtual);
+
+        /* PRÓXIMA */
+
+        proxima.addEventListener("click", function () {
+          indiceAtual++;
+
+          if (indiceAtual >= secoes.length) {
+            indiceAtual = 0;
+          }
+
+          mostrarConfiguracao(indiceAtual);
+        });
+
+        /* ANTERIOR */
+
+        anterior.addEventListener("click", function () {
+          indiceAtual--;
+
+          if (indiceAtual < 0) {
+            indiceAtual = secoes.length - 1;
+          }
+
+          mostrarConfiguracao(indiceAtual);
+        });
+      });
+    </script>
+
+    {% endblock %}
   </div>
 </div>
-
-{% endblock %}

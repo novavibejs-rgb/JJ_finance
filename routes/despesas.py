@@ -1,14 +1,28 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    url_for
+)
 
 from banco import despesas
 
+from utils.auth import somente_admin
 
 
+despesas_bp = Blueprint(
+    "despesas",
+    __name__
+)
 
-despesas_bp = Blueprint("despesas", __name__)
 
+# =========================================================
+# LISTAR DESPESAS
+# =========================================================
 
 @despesas_bp.route("/despesas")
+@somente_admin
 def index():
 
     lista_despesas = despesas.listar_despesas()
@@ -19,15 +33,29 @@ def index():
     )
 
 
-@despesas_bp.route("/despesas/nova", methods=["GET", "POST"])
+# =========================================================
+# NOVA DESPESA
+# =========================================================
+
+@despesas_bp.route(
+    "/despesas/nova",
+    methods=["GET", "POST"]
+)
+@somente_admin
 def nova():
 
     if request.method == "POST":
 
         categoria = request.form["categoria"]
+
         descricao = request.form["descricao"]
-        valor = float(request.form["valor"])
+
+        valor = float(
+            request.form["valor"]
+        )
+
         data = request.form["data"]
+
         observacao = request.form["observacao"]
 
         despesas.adicionar_despesa(
@@ -38,30 +66,70 @@ def nova():
             observacao
         )
 
-        return redirect(url_for("despesas.index"))
+        return redirect(
+            url_for("despesas.index")
+        )
 
-    return render_template("despesas/nova.html")
+
+    return render_template(
+        "despesas/nova.html"
+    )
 
 
-@despesas_bp.route("/despesas/excluir/<int:id>")
+# =========================================================
+# EXCLUIR DESPESA
+# =========================================================
+
+@despesas_bp.route(
+    "/despesas/excluir/<int:id>"
+)
+@somente_admin
 def excluir(id):
 
-    despesas.excluir_despesa(id)
+    despesas.excluir_despesa(
+        id
+    )
 
-    return redirect(url_for("despesas.index"))
+    return redirect(
+        url_for("despesas.index")
+    )
 
 
-@despesas_bp.route("/despesas/editar/<int:id>", methods=["GET", "POST"])
+# =========================================================
+# EDITAR DESPESA
+# =========================================================
+
+@despesas_bp.route(
+    "/despesas/editar/<int:id>",
+    methods=["GET", "POST"]
+)
+@somente_admin
 def editar(id):
 
-    despesa = despesas.buscar_despesa(id)
+    despesa = despesas.buscar_despesa(
+        id
+    )
+
+
+    if despesa is None:
+        return (
+            "Despesa não encontrada",
+            404
+        )
+
 
     if request.method == "POST":
 
         categoria = request.form["categoria"]
+
         descricao = request.form["descricao"]
-        valor = float(request.form["valor"])
+
+        valor = float(
+            request.form["valor"]
+        )
+
         data = request.form["data"]
+
         observacao = request.form["observacao"]
 
         despesas.atualizar_despesa(
@@ -73,9 +141,13 @@ def editar(id):
             observacao
         )
 
-        return redirect(url_for("despesas.index"))
+        return redirect(
+            url_for("despesas.index")
+        )
+
 
     return render_template(
         "despesas/editar.html",
         despesa=despesa
     )
+

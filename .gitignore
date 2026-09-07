@@ -17,3 +17,5 @@ instance/
 
 # Variáveis de ambiente
 .env
+# Uploads do sistema
+static/uploads/

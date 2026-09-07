@@ -22,3 +22,33 @@
 .valor-dashboard {
   margin-top: 10px;
 }
+/* =========================================================
+   GRÁFICO DE FATURAMENTO
+   ========================================================= */
+
+.grafico-container {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+#graficoFaturamento {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .grafico-container {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grafico-container {
+    height: 220px;
+  }
+}

@@ -56,7 +56,9 @@
     </a>
 
     <!-- CONFIGURAÇÕES -->
-    <a href="#" class="menu-item"> ⚙️ Configurações </a>
+    <a href="{{ url_for('configuracoes.index') }}" class="menu-item">
+      ⚙️ Configurações
+    </a>
   </nav>
 
   <!-- USUÁRIO LOGADO -->
@@ -71,11 +73,29 @@
   </div>
 
   <!-- SAIR -->
-  <div class="sidebar-logout">
-    <a href="{{ url_for('auth.logout') }}" class="menu-item menu-item-logout">
-      🚪 Sair
-    </a>
-  </div>
+ <div class="sidebar-logout">
+
+    <form
+        action="{{ url_for('auth.logout') }}"
+        method="POST"
+    >
+
+        <input
+            type="hidden"
+            name="csrf_token"
+            value="{{ csrf_token() }}"
+        >
+
+        <button
+            type="submit"
+            class="menu-item menu-item-logout"
+        >
+            🚪 Sair
+        </button>
+
+    </form>
+
+</div>
 
   <!-- RODAPÉ -->
   <div class="sidebar-footer">

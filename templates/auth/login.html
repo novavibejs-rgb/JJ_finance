@@ -1,8 +1,8 @@
 <!doctype html>
+
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Login - J&J Finance</title>
@@ -17,8 +17,8 @@
     <main class="login-page">
       <div class="login-card">
         <!-- =================================================
-                 MARCA
-                 ================================================= -->
+             MARCA
+             ================================================= -->
 
         <div class="login-brand">
           <div class="login-logo">J&J</div>
@@ -31,8 +31,8 @@
         </div>
 
         <!-- =================================================
-                 CABEÇALHO
-                 ================================================= -->
+             CABEÇALHO
+             ================================================= -->
 
         <div class="login-header">
           <h2>Bem-vindo de volta!</h2>
@@ -41,8 +41,8 @@
         </div>
 
         <!-- =================================================
-                 ERRO
-                 ================================================= -->
+             ERRO
+             ================================================= -->
 
         {% if erro %}
 
@@ -55,14 +55,20 @@
         {% endif %}
 
         <!-- =================================================
-                 FORMULÁRIO
-                 ================================================= -->
+             FORMULÁRIO
+             ================================================= -->
 
         <form
           method="POST"
           action="{{ url_for('auth.login') }}"
           class="login-form"
         >
+          <!-- =================================================
+                 CSRF
+                 ================================================= -->
+
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
           <!-- USUÁRIO -->
 
           <div class="login-field">
@@ -112,19 +118,28 @@
           </div>
 
           <!-- =================================================
-                     BOTÃO
-                     ================================================= -->
+                 BOTÃO
+                 ================================================= -->
 
           <button type="submit" class="login-submit">
             <span> Entrar no sistema </span>
 
-            <span class="login-submit-arrow">⏭</span>
+            <span class="login-submit-arrow"> ⏭ </span>
           </button>
+
+          <!-- RECUPERAÇÃO DE SENHA -->
+
+          <a
+            href="{{ url_for('auth.esqueci_senha') }}"
+            class="login-forgot-password"
+          >
+            Esqueceu a senha?
+          </a>
         </form>
 
         <!-- =================================================
-                 RODAPÉ
-                 ================================================= -->
+             RODAPÉ
+             ================================================= -->
 
         <div class="login-footer">
           <span class="login-security"> 🔐 Acesso protegido </span>
@@ -135,11 +150,12 @@
     </main>
 
     <!-- =========================================================
-         MOSTRAR / OCULTAR SENHA
-         ========================================================= -->
+     MOSTRAR / OCULTAR SENHA
+     ========================================================= -->
 
     <script>
       const senha = document.getElementById("senha");
+
       const mostrarSenha = document.getElementById("mostrarSenha");
 
       mostrarSenha.addEventListener("click", function () {

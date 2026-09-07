@@ -442,3 +442,251 @@ body {
     font-size: 18px;
   }
 }
+
+/* =========================================================
+   RECUPERAÇÃO DE SENHA
+   ========================================================= */
+
+.recovery-content {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.recovery-icon {
+  width: 65px;
+  height: 65px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #b60f7e, #1555d6);
+
+  font-size: 28px;
+}
+
+.recovery-content h2 {
+  text-align: center;
+
+  margin: 0 0 10px;
+
+  font-size: 24px;
+
+  color: #222;
+}
+
+.recovery-description {
+  text-align: center;
+
+  margin: 0 auto 25px;
+
+  max-width: 400px;
+
+  color: #666;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
+
+.recovery-form {
+  width: 100%;
+}
+
+.recovery-form label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #333;
+}
+
+.recovery-form .login-input-wrapper {
+  margin-bottom: 18px;
+}
+
+/* =========================================================
+   BOTÃO
+   ========================================================= */
+
+.login-button {
+  width: 100%;
+
+  border: none;
+
+  padding: 13px 18px;
+
+  border-radius: 8px;
+
+  background: linear-gradient(135deg, #b60f7e, #1555d6);
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.login-button:hover {
+  opacity: 0.92;
+
+  transform: translateY(-1px);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   VOLTAR PARA LOGIN
+   ========================================================= */
+
+.back-login {
+  display: block;
+
+  margin-top: 20px;
+
+  text-align: center;
+
+  color: #1555d6;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.back-login:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   REGRAS DA SENHA
+   ========================================================= */
+
+.password-rules {
+  margin: 5px 0 20px;
+
+  padding: 12px 14px;
+
+  border-radius: 8px;
+
+  background: #f5f6f8;
+
+  font-size: 13px;
+
+  color: #555;
+}
+
+.password-rules strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #333;
+}
+
+.password-rules ul {
+  margin: 0;
+
+  padding-left: 20px;
+}
+
+.password-rules li {
+  margin-bottom: 3px;
+}
+
+/* =========================================================
+   MENSAGENS
+   ========================================================= */
+
+.flash-container {
+  margin-bottom: 18px;
+}
+
+.flash {
+  padding: 11px 13px;
+
+  border-radius: 7px;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+.flash.success {
+  background: #e8f7ee;
+
+  color: #18753c;
+}
+
+.flash.error {
+  background: #fdeaea;
+
+  color: #a52828;
+}
+
+.flash.warning {
+  background: #fff5df;
+
+  color: #8a5a00;
+}
+
+.flash.info {
+  background: #e8f1ff;
+
+  color: #245a9b;
+}
+
+/* =========================================================
+   CÓDIGO DE 6 DÍGITOS
+   ========================================================= */
+
+#codigo {
+  text-align: center;
+
+  letter-spacing: 7px;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .recovery-content h2 {
+    font-size: 21px;
+  }
+
+  .recovery-description {
+    font-size: 13px;
+  }
+
+  .password-rules {
+    font-size: 12px;
+  }
+}

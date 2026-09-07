@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{ titulo }}</title>
+  </head>
+
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      font-family: Arial, Helvetica, sans-serif;
+    "
+  >
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      style="padding: 30px 15px"
+    >
+      <tr>
+        <td align="center">
+          <table
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="
+              max-width: 600px;
+              width: 100%;
+              background-color: #ffffff;
+              border-radius: 12px;
+              overflow: hidden;
+            "
+          >
+            <!-- CABEÇALHO -->
+
+            <tr>
+              <td
+                style="
+                  padding: 25px;
+                  text-align: center;
+                  background: linear-gradient(135deg, #b60f7e, #1555d6);
+                "
+              >
+                {% if logo %}
+
+                <img
+                  src="{{ logo }}"
+                  alt="{{ nome_empresa }}"
+                  style="
+                    max-width: 150px;
+                    max-height: 70px;
+                    margin-bottom: 10px;
+                  "
+                />
+
+                {% endif %}
+
+                <h1 style="margin: 0; color: #ffffff; font-size: 24px">
+                  {{ nome_empresa }}
+                </h1>
+              </td>
+            </tr>
+
+            <!-- CONTEÚDO -->
+
+            <tr>
+              <td
+                style="
+                  padding: 35px 30px;
+                  color: #333333;
+                  font-size: 15px;
+                  line-height: 1.6;
+                "
+              >
+                <h2 style="margin-top: 0; color: #222222">{{ titulo }}</h2>
+
+                {{ conteudo | safe }}
+              </td>
+            </tr>
+
+            <!-- RODAPÉ -->
+
+            <tr>
+              <td
+                style="
+                  padding: 20px;
+                  text-align: center;
+                  background-color: #f4f6f8;
+                  color: #777777;
+                  font-size: 12px;
+                "
+              >
+                <p style="margin: 0">{{ nome_empresa }}</p>
+
+                {% if telefone %}
+
+                <p style="margin: 5px 0 0">{{ telefone }}</p>
+
+                {% endif %}
+
+                <p style="margin: 8px 0 0; color: #999999">
+                  E-mail enviado automaticamente pelo J&J Finance.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

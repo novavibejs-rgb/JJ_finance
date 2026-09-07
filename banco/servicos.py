@@ -8,7 +8,7 @@ def cadastrar_servico(
     valor,
     forma_pagamento,
     data,
-):
+    ):
     conexao = conectar()
 
     conexao.execute(
@@ -120,6 +120,7 @@ def atualizar_servico(
 
     conexao.commit()
     conexao.close()
+
 
 
 def excluir_servico(id):

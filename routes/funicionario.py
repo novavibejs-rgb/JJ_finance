@@ -1,5 +1,10 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    url_for
+)
 
 from banco.fucionarios import (
     listar_funcionarios,
@@ -9,8 +14,13 @@ from banco.fucionarios import (
     excluir_funcionario
 )
 
+from utils.auth import somente_admin
 
-funcionario_bp = Blueprint("funcionarios", __name__)
+
+funcionario_bp = Blueprint(
+    "funcionarios",
+    __name__
+)
 
 
 # =========================================================
@@ -18,6 +28,7 @@ funcionario_bp = Blueprint("funcionarios", __name__)
 # =========================================================
 
 @funcionario_bp.route("/funcionarios")
+@somente_admin
 def index():
 
     lista_funcionarios = listar_funcionarios()
@@ -31,16 +42,33 @@ def index():
 # =========================================================
 # NOVO FUNCIONÁRIO
 # =========================================================
-@funcionario_bp.route("/funcionarios/novo", methods=["GET", "POST"])
+
+@funcionario_bp.route(
+    "/funcionarios/novo",
+    methods=["GET", "POST"]
+)
+@somente_admin
 def novo():
 
     if request.method == "POST":
 
         nome = request.form["nome"]
-        cargo = request.form.get("cargo")
-        email = request.form.get("email")
-        telefone = request.form.get("telefone")
-        data_admissao = request.form.get("data_admissao")
+
+        cargo = request.form.get(
+            "cargo"
+        )
+
+        email = request.form.get(
+            "email"
+        )
+
+        telefone = request.form.get(
+            "telefone"
+        )
+
+        data_admissao = request.form.get(
+            "data_admissao"
+        )
 
         cadastrar_funcionario(
             nome=nome,
@@ -58,6 +86,7 @@ def novo():
         "funcionarios/novo.html"
     )
 
+
 # =========================================================
 # EDITAR FUNCIONÁRIO
 # =========================================================
@@ -66,21 +95,39 @@ def novo():
     "/funcionarios/editar/<int:id>",
     methods=["GET", "POST"]
 )
+@somente_admin
 def editar(id):
 
-    funcionario = buscar_funcionario_por_id(id)
+    funcionario = buscar_funcionario_por_id(
+        id
+    )
 
     if funcionario is None:
-        return "Funcionário não encontrado", 404
+        return (
+            "Funcionário não encontrado",
+            404
+        )
 
 
     if request.method == "POST":
 
         nome = request.form["nome"]
-        cargo = request.form.get("cargo")
-        email = request.form.get("email")
-        telefone = request.form.get("telefone")
-        data_admissao = request.form.get("data_admissao")
+
+        cargo = request.form.get(
+            "cargo"
+        )
+
+        email = request.form.get(
+            "email"
+        )
+
+        telefone = request.form.get(
+            "telefone"
+        )
+
+        data_admissao = request.form.get(
+            "data_admissao"
+        )
 
         atualizar_funcionario(
             id=id,
@@ -101,21 +148,33 @@ def editar(id):
         funcionario=funcionario
     )
 
+
 # =========================================================
 # EXCLUIR FUNCIONÁRIO
 # =========================================================
 
-
-@funcionario_bp.route("/funcionarios/excluir/<int:id>")
+@funcionario_bp.route(
+    "/funcionarios/excluir/<int:id>"
+)
+@somente_admin
 def excluir(id):
 
-    funcionario = buscar_funcionario_por_id(id)
+    funcionario = buscar_funcionario_por_id(
+        id
+    )
 
     if funcionario is None:
-        return "Funcionário não encontrado", 404
+        return (
+            "Funcionário não encontrado",
+            404
+        )
 
-    excluir_funcionario(id)
+
+    excluir_funcionario(
+        id
+    )
 
     return redirect(
         url_for("funcionarios.index")
     )
+

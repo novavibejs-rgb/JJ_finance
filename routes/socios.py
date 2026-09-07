@@ -8,9 +8,13 @@ from flask import (
 
 from banco import socios
 
+from utils.auth import somente_admin
 
 
-socios_bp = Blueprint("socios", __name__)
+socios_bp = Blueprint(
+    "socios",
+    __name__
+)
 
 
 # =========================================================
@@ -18,6 +22,7 @@ socios_bp = Blueprint("socios", __name__)
 # =========================================================
 
 @socios_bp.route("/socios")
+@somente_admin
 def index():
 
     lista_socios = socios.listar_socios()
@@ -36,14 +41,24 @@ def index():
     "/socios/novo",
     methods=["GET", "POST"]
 )
+@somente_admin
 def novo():
 
     if request.method == "POST":
 
         nome = request.form["nome"]
-        email = request.form.get("email")
-        telefone = request.form.get("telefone")
-        foto = request.form.get("foto")
+
+        email = request.form.get(
+            "email"
+        )
+
+        telefone = request.form.get(
+            "telefone"
+        )
+
+        foto = request.form.get(
+            "foto"
+        )
 
         socios.cadastrar_socio(
             nome=nome,
@@ -69,20 +84,35 @@ def novo():
     "/socios/editar/<int:id>",
     methods=["GET", "POST"]
 )
+@somente_admin
 def editar(id):
 
-    socio = socios.buscar_socio_por_id(id)
+    socio = socios.buscar_socio_por_id(
+        id
+    )
 
     if socio is None:
-        return "Sócio não encontrado", 404
+        return (
+            "Sócio não encontrado",
+            404
+        )
 
 
     if request.method == "POST":
 
         nome = request.form["nome"]
-        email = request.form.get("email")
-        telefone = request.form.get("telefone")
-        foto = request.form.get("foto")
+
+        email = request.form.get(
+            "email"
+        )
+
+        telefone = request.form.get(
+            "telefone"
+        )
+
+        foto = request.form.get(
+            "foto"
+        )
 
         socios.atualizar_socio(
             id=id,
@@ -110,15 +140,25 @@ def editar(id):
 @socios_bp.route(
     "/socios/excluir/<int:id>"
 )
+@somente_admin
 def excluir(id):
 
-    socio = socios.buscar_socio_por_id(id)
+    socio = socios.buscar_socio_por_id(
+        id
+    )
 
     if socio is None:
-        return "Sócio não encontrado", 404
+        return (
+            "Sócio não encontrado",
+            404
+        )
 
-    socios.excluir_socio(id)
+
+    socios.excluir_socio(
+        id
+    )
 
     return redirect(
         url_for("socios.index")
     )
+

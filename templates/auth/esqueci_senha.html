@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Recuperar senha - J&J Finance</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login.css') }}"
+    />
+  </head>
+
+  <body>
+    <main class="login-page">
+      <div class="login-card">
+        <!-- =====================================================
+             MARCA
+             ===================================================== -->
+
+        <div class="login-brand">
+          <div class="login-logo">J&J</div>
+
+          <div class="login-brand-text">
+            <h1>J&J Finance</h1>
+
+            <span> Sistema de Gestão Financeira </span>
+          </div>
+        </div>
+
+        <!-- =====================================================
+             MENSAGENS
+             ===================================================== -->
+
+        {% if erro %}
+
+        <div class="flash-container">
+          <div class="flash error">{{ erro }}</div>
+        </div>
+
+        {% endif %} {% if sucesso %}
+
+        <div class="flash-container">
+          <div class="flash success">{{ sucesso }}</div>
+        </div>
+
+        {% endif %}
+
+        <!-- =====================================================
+             ETAPA 1 — E-MAIL
+             ===================================================== -->
+
+        {% if etapa == "email" %}
+
+        <div class="recovery-content">
+          <div class="recovery-icon">🔐</div>
+
+          <h2>Esqueceu sua senha?</h2>
+
+          <p class="recovery-description">
+            Informe o e-mail cadastrado para recuperar o acesso à sua conta.
+          </p>
+
+          <form
+            method="POST"
+            action="{{ url_for('auth.esqueci_senha') }}"
+            class="recovery-form"
+          >
+            <!-- Identifica a etapa -->
+            <input type="hidden" name="etapa" value="email" />
+
+            <label for="email"> E-mail </label>
+
+            <div class="login-input-wrapper">
+              <span class="login-input-icon"> ✉️ </span>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Digite seu e-mail"
+                autocomplete="email"
+                required
+                autofocus
+              />
+            </div>
+
+            <button type="submit" class="login-button">Continuar</button>
+          </form>
+
+          <a href="{{ url_for('auth.login') }}" class="back-login">
+            ← Voltar para o login
+          </a>
+        </div>
+
+        <!-- =====================================================
+             ETAPA 2 — CÓDIGO
+             ===================================================== -->
+
+        {% elif etapa == "codigo" %}
+
+        <div class="recovery-content">
+          <div class="recovery-icon">📧</div>
+
+          <h2>Verifique seu e-mail</h2>
+
+          <p class="recovery-description">
+            Enviamos um código de 6 dígitos para o e-mail informado.
+          </p>
+
+          <form
+            method="POST"
+            action="{{ url_for('auth.esqueci_senha') }}"
+            class="recovery-form"
+          >
+            <!-- Identifica a etapa -->
+            <input type="hidden" name="etapa" value="codigo" />
+
+            <!--
+                    Mantém o e-mail durante a recuperação.
+                    O usuário não precisa digitá-lo novamente.
+                -->
+
+            <input type="hidden" name="email" value="{{ email }}" />
+
+            <label for="codigo"> Código de verificação </label>
+
+            <div class="login-input-wrapper">
+              <span class="login-input-icon"> 🔢 </span>
+
+              <input
+                type="text"
+                id="codigo"
+                name="codigo"
+                placeholder="Digite o código de 6 dígitos"
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                autocomplete="one-time-code"
+                required
+                autofocus
+              />
+            </div>
+
+            <button type="submit" class="login-button">Verificar código</button>
+          </form>
+
+          <a href="{{ url_for('auth.esqueci_senha') }}" class="back-login">
+            ← Solicitar outro código
+          </a>
+        </div>
+
+        <!-- =====================================================
+             ETAPA 3 — NOVA SENHA
+             ===================================================== -->
+
+        {% elif etapa == "nova_senha" %}
+
+        <div class="recovery-content">
+          <div class="recovery-icon">🔑</div>
+
+          <h2>Nova senha</h2>
+
+          <p class="recovery-description">
+            Crie uma nova senha para acessar sua conta.
+          </p>
+
+          <form
+            method="POST"
+            action="{{ url_for('auth.esqueci_senha') }}"
+            class="recovery-form"
+          >
+            <!-- Identifica a etapa -->
+            <input type="hidden" name="etapa" value="nova_senha" />
+
+            <!-- =============================================
+                     NOVA SENHA
+                     ============================================= -->
+
+            <label for="nova_senha"> Nova senha </label>
+
+            <div class="login-input-wrapper">
+              <span class="login-input-icon"> 🔒 </span>
+
+              <input
+                type="password"
+                id="nova_senha"
+                name="nova_senha"
+                placeholder="Digite sua nova senha"
+                autocomplete="new-password"
+                minlength="8"
+                required
+                autofocus
+              />
+            </div>
+
+            <!-- =============================================
+                     CONFIRMAR SENHA
+                     ============================================= -->
+
+            <label for="confirmar_senha"> Confirmar nova senha </label>
+
+            <div class="login-input-wrapper">
+              <span class="login-input-icon"> 🔒 </span>
+
+              <input
+                type="password"
+                id="confirmar_senha"
+                name="confirmar_senha"
+                placeholder="Digite novamente sua senha"
+                autocomplete="new-password"
+                minlength="8"
+                required
+              />
+            </div>
+
+            <!-- =============================================
+                     REGRAS DA SENHA
+                     ============================================= -->
+
+            <div class="password-rules">
+              <strong> Sua senha deve: </strong>
+
+              <ul>
+                <li>Ter no mínimo 8 caracteres</li>
+
+                <li>Conter letra maiúscula</li>
+
+                <li>Conter letra minúscula</li>
+
+                <li>Conter número</li>
+
+                <li>Conter caractere especial</li>
+              </ul>
+            </div>
+
+            <!-- =============================================
+                     BOTÃO
+                     ============================================= -->
+
+            <button type="submit" class="login-button">Alterar senha</button>
+          </form>
+        </div>
+
+        {% endif %}
+      </div>
+    </main>
+  </body>
+</html>

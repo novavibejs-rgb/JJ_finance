@@ -1,5 +1,27 @@
 import os
 
-
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY", "chave-desenvolvimento-jj-finance")
+
+
+    # =========================================================
+    # CHAVE SECRETA
+    # =========================================================
+
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+
+    if not SECRET_KEY:
+        raise RuntimeError(
+            "SECRET_KEY não configurada."
+        )
+
+
+    # =========================================================
+    # SEGURANÇA DA SESSÃO
+    # =========================================================
+
+    SESSION_COOKIE_HTTPONLY = True
+
+    SESSION_COOKIE_SAMESITE = "Lax"
+
+    SESSION_COOKIE_SECURE = False
+

@@ -1,22 +1,19 @@
 <div class="row mt-4">
+  <!-- GRÁFICO DE FATURAMENTO -->
   <div class="col-lg-8">
     <div class="card shadow-sm">
       <div class="card-header">📊 Faturamento Semanal</div>
 
       <div class="card-body">
-        <p class="text-muted">O gráfico será exibido aqui.</p>
+        <div class="grafico-container">
+          <canvas id="graficoFaturamento"></canvas>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-4">
-    <div class="card shadow-sm">
-      <div class="card-header">📋 Últimos Serviços</div>
-
-      <div class="card-body">
-        <p class="text-muted">Nenhum serviço cadastrado.</p>
-      </div>
-    </div>
-  </div>
+  <!-- DADOS DO GRÁFICO -->
+  <script id="dados-faturamento" type="application/json">
+    {{ grafico_faturamento | tojson }}
+  </script>
 </div>
-''

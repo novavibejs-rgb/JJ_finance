@@ -1,8 +1,13 @@
 from banco.conexao import conectar
 
+
 def criar_tabelas():
     conn = conectar()
     cursor = conn.cursor()
+
+    # =========================================================
+    # SÓCIOS
+    # =========================================================
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS socios (
@@ -10,9 +15,12 @@ def criar_tabelas():
         nome TEXT NOT NULL,
         email TEXT,
         foto TEXT
-        
     )
     """)
+
+    # =========================================================
+    # SERVIÇOS
+    # =========================================================
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS servicos (
@@ -26,6 +34,10 @@ def criar_tabelas():
     )
     """)
 
+    # =========================================================
+    # VALES
+    # =========================================================
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS vales (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -35,9 +47,15 @@ def criar_tabelas():
         inicio_semana TEXT NOT NULL,
         fim_semana TEXT NOT NULL,
         data TEXT,
-        FOREIGN KEY (id_socio) REFERENCES socios(id) ON DELETE CASCADE
+        FOREIGN KEY (id_socio)
+            REFERENCES socios(id)
+            ON DELETE CASCADE
     )
     """)
+
+    # =========================================================
+    # CONFIGURAÇÃO DE E-MAIL
+    # =========================================================
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS configuracao_email (
@@ -51,6 +69,10 @@ def criar_tabelas():
     )
     """)
 
+    # =========================================================
+    # DESPESAS DA EMPRESA
+    # =========================================================
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS despesas_empresa (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,6 +83,10 @@ def criar_tabelas():
         observacao TEXT
     )
     """)
+
+    # =========================================================
+    # FUNCIONÁRIOS
+    # =========================================================
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS funcionarios (
@@ -74,13 +100,17 @@ def criar_tabelas():
         data_admissao TEXT
     )
     """)
-    
+
+    # =========================================================
+    # USUÁRIOS
+    # =========================================================
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         usuario TEXT NOT NULL UNIQUE,
+        email TEXT UNIQUE,
         senha TEXT NOT NULL,
         nivel TEXT NOT NULL DEFAULT 'admin',
         ativo INTEGER NOT NULL DEFAULT 1,
@@ -88,7 +118,31 @@ def criar_tabelas():
     )
     """)
 
-    
+    # =========================================================
+    # MIGRAÇÃO DA TABELA USUÁRIOS
+    # =========================================================
+    # Isso protege instalações antigas que ainda não possuem
+    # a coluna email.
+
+    cursor.execute("""
+        PRAGMA table_info(usuarios)
+    """)
+
+    colunas_usuarios = [
+        coluna[1]
+        for coluna in cursor.fetchall()
+    ]
+
+    if "email" not in colunas_usuarios:
+        cursor.execute("""
+            ALTER TABLE usuarios
+            ADD COLUMN email TEXT
+        """)
+
+    # =========================================================
+    # CONFIGURAÇÃO DA EMPRESA
+    # =========================================================
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS configuracao (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -98,8 +152,7 @@ def criar_tabelas():
         endereco TEXT,
         logo TEXT
     )
-""")
-
+    """)
 
     conn.commit()
     conn.close()
