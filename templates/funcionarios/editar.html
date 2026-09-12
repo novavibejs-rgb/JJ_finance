@@ -22,6 +22,8 @@ conteudo %}
 
 <div class="card funcionario-form">
   <form method="POST">
+    <!-- Proteção CSRF -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <!-- NOME -->
 
     <div class="form-group">

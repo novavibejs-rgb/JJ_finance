@@ -23,5 +23,5 @@ class Config:
 
     SESSION_COOKIE_SAMESITE = "Lax"
 
-    SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = os.environ.get("FLASK_ENV") == "production"
 

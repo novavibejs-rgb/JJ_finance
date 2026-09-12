@@ -1,47 +1,19 @@
 /* =========================================================
    DESPESAS
-   ========================================================= */
+========================================================= */
 
-/* Permite que o conteúdo encolha dentro do layout */
 .conteudo {
   min-width: 0;
   max-width: 100%;
 }
 
-/* Área responsável pela rolagem da tabela */
-.tabela-despesas-wrapper {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-
-  overflow-x: auto;
-  overflow-y: visible;
-
-  -webkit-overflow-scrolling: touch;
-}
-
-/* A tabela pode ser maior que a tela */
-.tabela-despesas {
-  width: 100%;
-  min-width: 950px;
-}
-
-/* Não deixa as colunas serem esmagadas */
-.tabela-despesas th,
-.tabela-despesas td {
-  white-space: nowrap;
-}
-
-/* Mantém os botões juntos */
-.tabela-despesas td:last-child {
-  white-space: nowrap;
-}
 /* =========================================================
-   DESPESAS
-   ========================================================= */
+   TABELA DE DESPESAS
+========================================================= */
 
 .tabela-despesas-wrapper {
   display: block !important;
+
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
@@ -54,11 +26,342 @@
 
 .tabela-despesas {
   width: 100%;
+
   min-width: 1000px !important;
+
   margin-bottom: 0;
 }
 
 .tabela-despesas th,
 .tabela-despesas td {
   white-space: nowrap;
+}
+
+.tabela-despesas td:last-child {
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PÁGINA — EDITAR DESPESA
+========================================================= */
+
+.pagina-editar-despesa {
+  width: 100%;
+  max-width: 850px;
+
+  margin: 0 auto;
+}
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.pagina-editar-despesa .pagina-cabecalho {
+  width: 100%;
+
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.pagina-editar-despesa .pagina-cabecalho h1 {
+  margin: 0;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  color: #172033;
+}
+
+.pagina-editar-despesa .pagina-cabecalho p {
+  margin: 5px 0 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.form-editar-despesa {
+  width: 100%;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 20px 45px rgba(14, 54, 163, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.04);
+
+  backdrop-filter: blur(12px);
+}
+
+/* =========================================================
+   GRUPOS
+========================================================= */
+
+.form-editar-despesa .form-grupo {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
+}
+
+.form-editar-despesa .form-grupo label {
+  margin-bottom: 7px;
+
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.form-editar-despesa .form-grupo input,
+.form-editar-despesa .form-grupo textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px 14px;
+
+  border: 1px solid #dbe2ea;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #1f2937;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.form-editar-despesa .form-grupo input:hover,
+.form-editar-despesa .form-grupo textarea:hover {
+  border-color: #b9c4d2;
+}
+
+/* =========================================================
+   FOCO
+========================================================= */
+
+.form-editar-despesa .form-grupo input:focus,
+.form-editar-despesa .form-grupo textarea:focus {
+  border-color: #1555d6;
+
+  background: #ffffff;
+
+  box-shadow: 0 0 0 3px rgba(21, 85, 214, 0.1);
+}
+
+/* =========================================================
+   VALOR
+========================================================= */
+
+.form-editar-despesa #valor {
+  font-weight: 600;
+
+  color: #0e36a3;
+}
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.form-editar-despesa textarea {
+  min-height: 120px;
+
+  resize: vertical;
+}
+
+/* =========================================================
+   LINHA DUPLA
+========================================================= */
+
+.form-linha-despesa {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.form-editar-acoes {
+  display: flex;
+
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 10px;
+
+  padding-top: 18px;
+
+  margin-top: 10px;
+
+  border-top: 1px solid #eef1f5;
+}
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.form-editar-acoes button,
+.form-editar-acoes a {
+  min-width: 140px;
+
+  padding: 11px 18px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-editar-acoes button:hover,
+.form-editar-acoes a:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   BOTÃO SALVAR
+========================================================= */
+
+.btn-salvar-despesa {
+  border: none;
+
+  color: #ffffff;
+
+  background: linear-gradient(135deg, #1555d6, #0e36a3);
+
+  box-shadow: 0 5px 15px rgba(21, 85, 214, 0.2);
+}
+
+.btn-salvar-despesa:hover {
+  box-shadow: 0 8px 20px rgba(21, 85, 214, 0.28);
+}
+
+/* =========================================================
+   BOTÃO CANCELAR
+========================================================= */
+
+.btn-cancelar-despesa {
+  color: #374151;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe2ea;
+}
+
+.btn-cancelar-despesa:hover {
+  background: #f8fafc;
+
+  border-color: #cbd5e1;
+}
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 768px) {
+  .pagina-editar-despesa {
+    max-width: 100%;
+  }
+
+  .pagina-editar-despesa .pagina-cabecalho {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    margin-bottom: 15px;
+  }
+
+  .pagina-editar-despesa .pagina-cabecalho h1 {
+    font-size: 26px;
+  }
+
+  .form-editar-despesa {
+    padding: 20px;
+
+    border-radius: 15px;
+  }
+
+  .form-linha-despesa {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+  .form-editar-acoes {
+    flex-direction: column-reverse;
+
+    align-items: stretch;
+  }
+
+  .form-editar-acoes button,
+  .form-editar-acoes a {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 480px) {
+  .form-editar-despesa {
+    padding: 16px;
+
+    border-radius: 13px;
+  }
+
+  .pagina-editar-despesa .pagina-cabecalho h1 {
+    font-size: 24px;
+  }
+
+  .form-editar-despesa .form-grupo input,
+  .form-editar-despesa .form-grupo textarea {
+    font-size: 16px;
+  }
 }

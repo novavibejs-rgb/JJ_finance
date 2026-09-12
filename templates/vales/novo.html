@@ -15,6 +15,7 @@ block css %}
 
 <div class="form-vale">
   <form method="POST" action="{{ url_for('vales.novo') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <!-- =====================================================
          TIPO DE PESSOA
          ===================================================== -->

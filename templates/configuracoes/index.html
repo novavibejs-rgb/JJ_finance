@@ -53,6 +53,8 @@
 
       <div class="configuracao-conteudo">
         <form method="POST" enctype="multipart/form-data">
+          <!-- Proteção CSRF -->
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <input type="hidden" name="tipo_configuracao" value="empresa" />
 
           <!-- NOME -->

@@ -1,0 +1,487 @@
+
+{% extends "layout/base.html" %}
+
+{% block titulo %}
+Editar Vale
+{% endblock %}
+
+
+{% block css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/vales.css') }}"
+>
+
+{% endblock %}
+
+
+{% block conteudo %}
+
+<!-- =========================================================
+     CABEÇALHO
+========================================================= -->
+
+<div class="pagina-cabecalho">
+
+    <div>
+
+        <h1>✏️ Editar Vale</h1>
+
+        <p>
+            Atualize as informações deste vale.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FORMULÁRIO
+========================================================= -->
+
+<div class="form-vale">
+
+    <form
+        method="POST"
+        action="{{ url_for('vales.editar', id=vale['id']) }}"
+    >
+
+        <!-- =================================================
+             PROTEÇÃO CSRF
+        ================================================== -->
+
+        <input
+            type="hidden"
+            name="csrf_token"
+            value="{{ csrf_token() }}"
+        >
+
+
+        <!-- =================================================
+             TIPO DE PESSOA
+        ================================================== -->
+
+        <div class="form-grupo">
+
+            <label for="tipo_pessoa">
+                Tipo de pessoa
+            </label>
+
+            <select
+                id="tipo_pessoa"
+                name="tipo_pessoa"
+                required
+            >
+
+                <option value="">
+                    Selecione o tipo
+                </option>
+
+                <option
+                    value="socio"
+                    {% if vale['tipo_pessoa'] == 'socio' %}
+                        selected
+                    {% endif %}
+                >
+                    👤 Sócio
+                </option>
+
+                <option
+                    value="funcionario"
+                    {% if vale['tipo_pessoa'] == 'funcionario' %}
+                        selected
+                    {% endif %}
+                >
+                    👷 Funcionário
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- =================================================
+             PESSOA
+        ================================================== -->
+
+        <div class="form-grupo">
+
+            <label for="id_pessoa">
+                Pessoa
+            </label>
+
+            <select
+                id="id_pessoa"
+                name="id_pessoa"
+                required
+            >
+
+                <option value="">
+                    Selecione a pessoa
+                </option>
+
+
+                <!-- =========================================
+                     SÓCIOS
+                ========================================== -->
+
+                {% if vale['tipo_pessoa'] == 'socio' %}
+
+                    {% for socio in socios %}
+
+                        <option
+                            value="{{ socio['id'] }}"
+                            {% if socio['id'] == vale['id_pessoa'] %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ socio['id'] }} - {{ socio['nome'] }}
+                        </option>
+
+                    {% endfor %}
+
+
+                <!-- =========================================
+                     FUNCIONÁRIOS
+                ========================================== -->
+
+                {% elif vale['tipo_pessoa'] == 'funcionario' %}
+
+                    {% for funcionario in funcionarios %}
+
+                        <option
+                            value="{{ funcionario['id'] }}"
+                            {% if funcionario['id'] == vale['id_pessoa'] %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ funcionario['id'] }} - {{ funcionario['nome'] }}
+                        </option>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            </select>
+
+        </div>
+
+
+        <!-- =================================================
+             VALOR
+        ================================================== -->
+
+        <div class="form-grupo">
+
+            <label for="valor">
+                Valor do vale
+            </label>
+
+            <div class="campo-valor">
+
+                <span>R$</span>
+
+                <input
+                    type="number"
+                    id="valor"
+                    name="valor"
+                    step="0.01"
+                    min="0"
+                    value="{{ vale['valor'] }}"
+                    placeholder="0,00"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             DATA
+        ================================================== -->
+
+        <div class="form-grupo">
+
+            <label for="data">
+                Data
+            </label>
+
+            <input
+                type="date"
+                id="data"
+                name="data"
+                value="{{ vale['data'] }}"
+                required
+            >
+
+        </div>
+
+
+        <!-- =================================================
+             DESCRIÇÃO
+        ================================================== -->
+
+        <div class="form-grupo">
+
+            <label for="descricao">
+                Descrição
+            </label>
+
+            <textarea
+                id="descricao"
+                name="descricao"
+                rows="4"
+                placeholder="Ex.: Vale referente à semana..."
+            >{{ vale['descricao'] or '' }}</textarea>
+
+        </div>
+
+
+        <!-- =================================================
+             BOTÕES
+        ================================================= -->
+
+        <div class="form-acoes">
+
+            <a
+                href="{{ url_for('vales.index') }}"
+                class="btn btn-secondary"
+            >
+                ← Cancelar
+            </a>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                💾 Salvar Alteração
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- =========================================================
+     DADOS DOS SÓCIOS
+========================================================= -->
+
+<div id="dados-socios" hidden>
+
+    {% for socio in socios %}
+
+        <div
+            class="pessoa-dado"
+            data-id="{{ socio['id'] }}"
+            data-nome="{{ socio['nome'] }}"
+        ></div>
+
+    {% endfor %}
+
+</div>
+
+
+<!-- =========================================================
+     DADOS DOS FUNCIONÁRIOS
+========================================================= -->
+
+<div id="dados-funcionarios" hidden>
+
+    {% for funcionario in funcionarios %}
+
+        <div
+            class="pessoa-dado"
+            data-id="{{ funcionario['id'] }}"
+            data-nome="{{ funcionario['nome'] }}"
+        ></div>
+
+    {% endfor %}
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    const tipoPessoa =
+        document.getElementById("tipo_pessoa");
+
+    const pessoa =
+        document.getElementById("id_pessoa");
+
+
+    /* =====================================================
+       CARREGAR SÓCIOS
+    ===================================================== */
+
+    const elementosSocios =
+        document.querySelectorAll(
+            "#dados-socios .pessoa-dado"
+        );
+
+    const socios = [];
+
+    elementosSocios.forEach(function (elemento) {
+
+        socios.push({
+
+            id: elemento.dataset.id,
+
+            nome: elemento.dataset.nome
+
+        });
+
+    });
+
+
+    /* =====================================================
+       CARREGAR FUNCIONÁRIOS
+    ===================================================== */
+
+    const elementosFuncionarios =
+        document.querySelectorAll(
+            "#dados-funcionarios .pessoa-dado"
+        );
+
+    const funcionarios = [];
+
+    elementosFuncionarios.forEach(function (elemento) {
+
+        funcionarios.push({
+
+            id: elemento.dataset.id,
+
+            nome: elemento.dataset.nome
+
+        });
+
+    });
+
+
+    /* =====================================================
+       FUNÇÃO PARA CARREGAR PESSOAS
+    ===================================================== */
+
+    function carregarPessoas(tipo, idSelecionado = null) {
+
+        pessoa.innerHTML = "";
+
+
+        if (!tipo) {
+
+            const opcao =
+                document.createElement("option");
+
+            opcao.value = "";
+
+            opcao.textContent =
+                "Primeiro selecione o tipo";
+
+            pessoa.appendChild(opcao);
+
+            return;
+        }
+
+
+        const lista =
+            tipo === "socio"
+                ? socios
+                : funcionarios;
+
+
+        const textoInicial =
+            tipo === "socio"
+                ? "Selecione o sócio"
+                : "Selecione o funcionário";
+
+
+        const opcaoInicial =
+            document.createElement("option");
+
+        opcaoInicial.value = "";
+
+        opcaoInicial.textContent =
+            textoInicial;
+
+        pessoa.appendChild(opcaoInicial);
+
+
+        lista.forEach(function (item) {
+
+            const opcao =
+                document.createElement("option");
+
+            opcao.value = item.id;
+
+            opcao.textContent =
+                item.id + " - " + item.nome;
+
+
+            /*
+             * Mantém a pessoa que já estava
+             * cadastrada no vale.
+             */
+
+            if (
+                idSelecionado !== null &&
+                String(item.id) === String(idSelecionado)
+            ) {
+
+                opcao.selected = true;
+
+            }
+
+
+            pessoa.appendChild(opcao);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       ALTERAÇÃO DO TIPO DE PESSOA
+    ===================================================== */
+
+    tipoPessoa.addEventListener(
+        "change",
+        function () {
+
+            carregarPessoas(this.value);
+
+        }
+    );
+
+
+    /* =====================================================
+       CARREGAMENTO INICIAL
+       
+       Aqui o JavaScript mantém:
+       - Sócio/Funcionário
+       - Pessoa selecionada
+    ===================================================== */
+
+    const tipoInicial =
+        "{{ vale['tipo_pessoa'] }}";
+
+    const pessoaInicial =
+        "{{ vale['id_pessoa'] }}";
+
+
+    carregarPessoas(
+        tipoInicial,
+        pessoaInicial
+    );
+
+</script>
+
+{% endblock %}

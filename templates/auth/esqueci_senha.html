@@ -68,6 +68,9 @@
             action="{{ url_for('auth.esqueci_senha') }}"
             class="recovery-form"
           >
+            <!-- Proteção CSRF -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
             <!-- Identifica a etapa -->
             <input type="hidden" name="etapa" value="email" />
 

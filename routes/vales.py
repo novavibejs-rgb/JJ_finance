@@ -128,8 +128,7 @@ def novo():
 
 # =========================================================
 
-@vales_bp.route(
-    "/editar/[int:id](int:id)",
+@vales_bp.route("/editar/<int:id>",
     methods=["GET", "POST"]
     )
 
@@ -213,16 +212,11 @@ def editar(id):
 
 # =========================================================
 
-@vales_bp.route(
-        
-    "/excluir/[int:id](int:id)"
-    )
+@vales_bp.route("/excluir/<int:id>")
 
 @somente_admin
 def excluir(id):
-
-
-
+    
     vales.excluir_vale(id)
 
     return redirect(
