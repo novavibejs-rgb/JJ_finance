@@ -14,7 +14,9 @@ def criar_tabelas():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         email TEXT,
-        foto TEXT
+        foto TEXT,
+        telefone TEXT,
+        status TEXT NOT NULL DEFAULT 'online'
     )
     """)
 
@@ -41,15 +43,13 @@ def criar_tabelas():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS vales (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        id_socio INTEGER NOT NULL,
+        id_pessoa INTEGER NOT NULL,
+        tipo_pessoa TEXT NOT NULL,
         valor REAL NOT NULL,
         descricao TEXT,
-        inicio_semana TEXT NOT NULL,
-        fim_semana TEXT NOT NULL,
-        data TEXT,
-        FOREIGN KEY (id_socio)
-            REFERENCES socios(id)
-            ON DELETE CASCADE
+        inicio_semana TEXT,
+        fim_semana TEXT,
+        data TEXT
     )
     """)
 
@@ -96,7 +96,7 @@ def criar_tabelas():
         email TEXT,
         telefone TEXT,
         foto TEXT,
-        status TEXT NOT NULL DEFAULT 'offline',
+        status TEXT NOT NULL DEFAULT 'online',
         data_admissao TEXT
     )
     """)
@@ -121,8 +121,6 @@ def criar_tabelas():
     # =========================================================
     # MIGRAÇÃO DA TABELA USUÁRIOS
     # =========================================================
-    # Isso protege instalações antigas que ainda não possuem
-    # a coluna email.
 
     cursor.execute("""
         PRAGMA table_info(usuarios)
@@ -154,6 +152,21 @@ def criar_tabelas():
     )
     """)
 
+    # =========================================================
+    # RECUPERAÇÃO DE SENHA
+    # =========================================================
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS recuperacao_senha (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        usuario_id INTEGER NOT NULL,
+        codigo_hash TEXT NOT NULL,
+        expiracao DATETIME NOT NULL,
+        tentativas INTEGER NOT NULL DEFAULT 0,
+        usado INTEGER NOT NULL DEFAULT 0,
+        criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
     conn.commit()
     conn.close()
-
