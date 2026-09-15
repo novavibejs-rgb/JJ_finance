@@ -53,8 +53,9 @@
 
       <div class="configuracao-conteudo">
         <form method="POST" enctype="multipart/form-data">
-          <!-- Proteção CSRF -->
+          <!-- CSRF -->
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
           <input type="hidden" name="tipo_configuracao" value="empresa" />
 
           <!-- NOME -->
@@ -123,6 +124,8 @@
             />
           </div>
 
+          <!-- LOGO ATUAL -->
+
           {% if configuracao and configuracao.logo %}
 
           <div class="logo-preview">
@@ -135,6 +138,8 @@
           </div>
 
           {% endif %}
+
+          <!-- SALVAR -->
 
           <button type="submit">💾 Salvar configuração</button>
         </form>
@@ -151,9 +156,15 @@
       <p>Configure o servidor utilizado pelo sistema para envio de e-mails.</p>
 
       <div class="configuracao-conteudo">
-        <!-- FORMULÁRIO PRINCIPAL -->
+        <!-- =================================================
+                     FORMULÁRIO PRINCIPAL DE E-MAIL
+                     ================================================= -->
 
         <form method="POST">
+          <!-- CSRF -->
+
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
           <input type="hidden" name="tipo_configuracao" value="email" />
 
           <!-- SERVIDOR SMTP -->
@@ -219,128 +230,177 @@
           <button type="submit">💾 Salvar configuração</button>
         </form>
 
-        <!-- RESULTADO -->
-
-        {% if mensagem_smtp %}
-
-        <div
-          class="resultado-smtp {% if sucesso_smtp %}sucesso{% else %}erro{% endif %}"
-        >
-          {{ mensagem_smtp }}
-        </div>
-
-        {% endif %}
-
-        <!-- AÇÕES -->
+        <!-- =================================================
+                     ÁREA DE TESTE
+                     ================================================= -->
 
         <div class="acoes-email">
-          <!-- TESTAR CONEXÃO -->
+          <!-- CABEÇALHO -->
 
-          <form method="POST">
-            <input
-              type="hidden"
-              name="tipo_configuracao"
-              value="testar_email"
-            />
+          <div class="cabecalho-acoes-email">
+            <div class="icone-email-teste">✉️</div>
 
-            <button type="submit" class="botao-acao-email">
-              <span class="icone-acao"> 🧪 </span>
+            <div>
+              <h3>Teste de comunicação</h3>
 
-              <span> Testar conexão </span>
-            </button>
-          </form>
+              <p>
+                Verifique se o J&J Finance consegue se conectar e enviar
+                mensagens utilizando esta configuração.
+              </p>
+            </div>
+          </div>
 
-          <!-- ENVIAR TESTE -->
+          <!-- =================================================
+                         BOTÕES DE TESTE
+                         ================================================= -->
 
-          <form method="POST">
-            <input
-              type="hidden"
-              name="tipo_configuracao"
-              value="enviar_email_teste"
-            />
+          <div class="botoes-acoes-email">
+            <!-- TESTAR CONEXÃO -->
 
-            <button type="submit" class="botao-acao-email">
-              <span class="icone-acao"> ✉️ </span>
+            <form method="POST" action="{{ url_for('configuracoes.index') }}">
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token() }}"
+              />
 
-              <span> Enviar teste </span>
-            </button>
-          </form>
+              <input
+                type="hidden"
+                name="tipo_configuracao"
+                value="testar_email"
+              />
+
+              <button type="submit" class="botao-acao-email">
+                <span class="icone-acao"> 🧪 </span>
+
+                <span> Testar conexão </span>
+              </button>
+            </form>
+
+            <!-- ENVIAR E-MAIL DE TESTE -->
+
+            <form method="POST" action="{{ url_for('configuracoes.index') }}">
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token() }}"
+              />
+
+              <input
+                type="hidden"
+                name="tipo_configuracao"
+                value="enviar_email_teste"
+              />
+
+              <button type="submit" class="botao-acao-email">
+                <span class="icone-acao"> ✉️ </span>
+
+                <span> Enviar e-mail de teste </span>
+              </button>
+            </form>
+          </div>
+
+          <!-- =================================================
+                         RESULTADO
+                         ================================================= -->
+
+          {% if mensagem_smtp %}
+
+          <div
+            class="resultado-smtp {% if sucesso_smtp %}sucesso{% else %}erro{% endif %}"
+            role="alert"
+          >
+            <div class="resultado-smtp-icone">
+              {% if sucesso_smtp %} ✓ {% else %} ! {% endif %}
+            </div>
+
+            <div class="resultado-smtp-conteudo">
+              <strong>
+                {% if sucesso_smtp %} Operação realizada com sucesso {% else %}
+                Não foi possível concluir a operação {% endif %}
+              </strong>
+
+              <span> {{ mensagem_smtp }} </span>
+            </div>
+          </div>
+
+          {% endif %}
         </div>
       </div>
     </section>
+  </div>
+</div>
 
-    <!-- =========================================================
+<!-- =========================================================
      JAVASCRIPT
      ========================================================= -->
 
-    <script>
-      const configuracaoAtiva = "{{ configuracao_ativa }}";
+<script>
+  const configuracaoAtiva = "{{ configuracao_ativa }}";
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const secoes = document.querySelectorAll(".configuracao-secao");
+  document.addEventListener("DOMContentLoaded", function () {
+    const secoes = document.querySelectorAll(".configuracao-secao");
 
-        const anterior = document.getElementById("configAnterior");
+    const anterior = document.getElementById("configAnterior");
 
-        const proxima = document.getElementById("configProxima");
+    const proxima = document.getElementById("configProxima");
 
-        const indicador = document.getElementById("configIndicador");
+    const indicador = document.getElementById("configIndicador");
 
-        const nomes = ["Empresa", "E-mail", "Sistema", "Aparência"];
+    const nomes = ["Empresa", "E-mail"];
 
-        let indiceAtual = 0;
+    let indiceAtual = 0;
 
-        /* CONFIGURAÇÃO INICIAL */
+    /* =====================================================
+               CONFIGURAÇÃO INICIAL
+               ===================================================== */
 
-        if (configuracaoAtiva === "empresa") {
-          indiceAtual = 0;
-        } else if (configuracaoAtiva === "email") {
-          indiceAtual = 1;
-        } else if (configuracaoAtiva === "sistema") {
-          indiceAtual = 2;
-        } else if (configuracaoAtiva === "aparencia") {
-          indiceAtual = 3;
-        }
+    if (configuracaoAtiva === "email") {
+      indiceAtual = 1;
+    }
 
-        /* MOSTRAR CONFIGURAÇÃO */
+    /* =====================================================
+               MOSTRAR CONFIGURAÇÃO
+               ===================================================== */
 
-        function mostrarConfiguracao(indice) {
-          secoes.forEach(function (secao, indiceSecao) {
-            secao.classList.toggle("ativa", indiceSecao === indice);
-          });
-
-          indicador.textContent = nomes[indice];
-        }
-
-        /* MOSTRAR INICIAL */
-
-        mostrarConfiguracao(indiceAtual);
-
-        /* PRÓXIMA */
-
-        proxima.addEventListener("click", function () {
-          indiceAtual++;
-
-          if (indiceAtual >= secoes.length) {
-            indiceAtual = 0;
-          }
-
-          mostrarConfiguracao(indiceAtual);
-        });
-
-        /* ANTERIOR */
-
-        anterior.addEventListener("click", function () {
-          indiceAtual--;
-
-          if (indiceAtual < 0) {
-            indiceAtual = secoes.length - 1;
-          }
-
-          mostrarConfiguracao(indiceAtual);
-        });
+    function mostrarConfiguracao(indice) {
+      secoes.forEach(function (secao, indiceSecao) {
+        secao.classList.toggle("ativa", indiceSecao === indice);
       });
-    </script>
 
-    {% endblock %}
-  </div>
-</div>
+      indicador.textContent = nomes[indice];
+    }
+
+    mostrarConfiguracao(indiceAtual);
+
+    /* =====================================================
+               PRÓXIMA
+               ===================================================== */
+
+    proxima.addEventListener("click", function () {
+      indiceAtual++;
+
+      if (indiceAtual >= secoes.length) {
+        indiceAtual = 0;
+      }
+
+      mostrarConfiguracao(indiceAtual);
+    });
+
+    /* =====================================================
+               ANTERIOR
+               ===================================================== */
+
+    anterior.addEventListener("click", function () {
+      indiceAtual--;
+
+      if (indiceAtual < 0) {
+        indiceAtual = secoes.length - 1;
+      }
+
+      mostrarConfiguracao(indiceAtual);
+    });
+  });
+</script>
+
+{% endblock %}

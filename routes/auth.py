@@ -46,7 +46,7 @@ def login():
                 """
                 SELECT *
                 FROM usuarios
-                WHERE usuario = ?
+                WHERE usuario = %s
                   AND ativo = 1
                 LIMIT 1
                 """,
@@ -112,7 +112,7 @@ def esqueci_senha():
             """
             SELECT id, email
             FROM usuarios
-            WHERE email = ?
+            WHERE email = %s
               AND ativo = 1
             LIMIT 1
             """,
@@ -134,7 +134,7 @@ def esqueci_senha():
                 """
                 UPDATE recuperacao_senha
                 SET usado = 1
-                WHERE usuario_id = ?
+                WHERE usuario_id = %s
                   AND usado = 0
                 """,
                 (usuario_db["id"],),
@@ -152,7 +152,7 @@ def esqueci_senha():
                     tentativas,
                     usado
                 )
-                VALUES (?, ?, ?, 0, 0)
+                VALUES (%s, %s, %s, 0, 0)
                 """,
                 (usuario_db["id"], codigo_hash, expiracao),
             )
@@ -242,7 +242,7 @@ J&J Finance"""
             """
             SELECT id
             FROM usuarios
-            WHERE email = ?
+            WHERE email = %s
               AND ativo = 1
             LIMIT 1
             """,
@@ -265,7 +265,7 @@ J&J Finance"""
             """
             SELECT *
             FROM recuperacao_senha
-            WHERE usuario_id = ?
+            WHERE usuario_id = %s
               AND usado = 0
             ORDER BY id DESC
             LIMIT 1
@@ -292,7 +292,7 @@ J&J Finance"""
                 """
                 UPDATE recuperacao_senha
                 SET usado = 1
-                WHERE id = ?
+                WHERE id = %s
                 """,
                 (recuperacao["id"],),
             )
@@ -330,7 +330,7 @@ J&J Finance"""
                 """
                 UPDATE recuperacao_senha
                 SET tentativas = tentativas + 1
-                WHERE id = ?
+                WHERE id = %s
                 """,
                 (recuperacao["id"],),
             )
@@ -432,8 +432,8 @@ J&J Finance"""
         conn.execute(
             """
             UPDATE usuarios
-            SET senha = ?
-            WHERE id = ?
+            SET senha = %s
+            WHERE id = %s
             """,
             (senha_hash, usuario_id),
         )
@@ -442,7 +442,7 @@ J&J Finance"""
             """
             UPDATE recuperacao_senha
             SET usado = 1
-            WHERE id = ?
+            WHERE id = %s
             """,
             (codigo_id,),
         )

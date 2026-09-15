@@ -21,7 +21,7 @@ def cadastrar_servico(
             forma_pagamento,
             data
         )
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s, %s)
         """,
         (
             cliente,
@@ -74,7 +74,7 @@ def buscar_servico_por_id(id):
             forma_pagamento,
             data
         FROM servicos
-        WHERE id = ?
+        WHERE id = %s
         """,
         (id,),
     ).fetchone()
@@ -99,13 +99,13 @@ def atualizar_servico(
         """
         UPDATE servicos
         SET
-            cliente = ?,
-            servico = ?,
-            descricao = ?,
-            valor = ?,
-            forma_pagamento = ?,
-            data = ?
-        WHERE id = ?
+            cliente = %s,
+            servico = %s,
+            descricao = %s,
+            valor = %s,
+            forma_pagamento = %s,
+            data = %s
+        WHERE id = %s
         """,
         (
             cliente,
@@ -129,7 +129,7 @@ def excluir_servico(id):
     conexao.execute(
         """
         DELETE FROM servicos
-        WHERE id = ?
+        WHERE id = %s
         """,
         (id,),
     )

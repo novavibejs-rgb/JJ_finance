@@ -35,7 +35,7 @@ def buscar_funcionario_por_id(id):
     cursor.execute("""
         SELECT *
         FROM funcionarios
-        WHERE id = ?
+        WHERE id = %s
     """, (id,))
 
     funcionario = cursor.fetchone()
@@ -71,7 +71,7 @@ def cadastrar_funcionario(
             status,
             data_admissao
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
     """, (
         nome,
         cargo,
@@ -107,13 +107,13 @@ def atualizar_funcionario(
     cursor.execute("""
         UPDATE funcionarios
         SET
-            nome = ?,
-            cargo = ?,
-            email = ?,
-            telefone = ?,
-            foto = ?,
-            data_admissao = ?
-        WHERE id = ?
+            nome = %s,
+            cargo = %s,
+            email = %s,
+            telefone = %s,
+            foto = %s,
+            data_admissao = %s
+        WHERE id = %s
     """, (
         nome,
         cargo,
@@ -140,8 +140,8 @@ def alterar_status_funcionario(id, status):
 
     cursor.execute("""
         UPDATE funcionarios
-        SET status = ?
-        WHERE id = ?
+        SET status = %s
+        WHERE id = %s
     """, (
         status,
         id
@@ -163,7 +163,7 @@ def excluir_funcionario(id):
 
     cursor.execute("""
         DELETE FROM funcionarios
-        WHERE id = ?
+        WHERE id = %s
     """, (id,))
 
     conexao.commit()

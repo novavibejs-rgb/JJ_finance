@@ -41,7 +41,7 @@
         type="text"
         id="categoria"
         name="categoria"
-        value="{{ despesa[1] }}"
+        value="{{ despesa['categoria'] }}"
         required
       />
     </div>
@@ -57,7 +57,7 @@
         type="text"
         id="descricao"
         name="descricao"
-        value="{{ despesa[2] }}"
+        value="{{ despesa['descricao'] }}"
         required
       />
     </div>
@@ -76,7 +76,7 @@
           name="valor"
           step="0.01"
           min="0"
-          value="{{ despesa[3] }}"
+          value="{{ despesa['valor'] }}"
           required
         />
       </div>
@@ -88,7 +88,7 @@
           type="date"
           id="data"
           name="data"
-          value="{{ despesa[4] }}"
+          value="{{ despesa['data'] }}"
           required
         />
       </div>
@@ -101,7 +101,9 @@
     <div class="form-grupo">
       <label for="observacao"> Observação </label>
 
-      <textarea id="observacao" name="observacao">{{ despesa[5] }}</textarea>
+      <textarea id="observacao" name="observacao">
+{{ despesa['observacao'] }}</textarea
+      >
     </div>
 
     <!-- =================================================

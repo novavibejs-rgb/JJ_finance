@@ -8,7 +8,7 @@ def adicionar_despesa(categoria, descricao, valor, data, observacao):
     cursor.execute("""
         INSERT INTO despesas_empresa
         (categoria, descricao, valor, data, observacao)
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s)
     """, (
         categoria,
         descricao,
@@ -52,13 +52,14 @@ def somar_despesas():
     cursor.execute("""
         SELECT COALESCE(SUM(valor), 0) AS total
         FROM despesas_empresa
-        WHERE data >= ?
-    """, (inicio_semana(),))
+        WHERE data >= %s
+    """, (
+        inicio_semana().strftime("%Y-%m-%d"),
+    ))
 
-    total = cursor.fetchone()[0]
+    total = cursor.fetchone()["total"]
 
     conn.close()
-
     return total
 
 
@@ -76,7 +77,7 @@ def buscar_despesa (id):
             data,
             observacao
         FROM despesas_empresa
-        WHERE id = ?
+        WHERE id = %s
     """, (id,))
 
     despesa = cursor.fetchone()
@@ -94,12 +95,12 @@ def atualizar_despesa(id, categoria, descricao, valor, data, observacao):
     cursor.execute("""
         UPDATE despesas_empresa
         SET
-            categoria = ?,
-            descricao = ?,
-            valor = ?,
-            data = ?,
-            observacao = ?
-        WHERE id = ?
+            categoria = %s,
+            descricao = %s,
+            valor = %s,
+            data = %s,
+            observacao = %s
+        WHERE id = %s
     """, (
         categoria,
         descricao,
@@ -120,7 +121,7 @@ def excluir_despesa(id):
 
     cursor.execute("""
         DELETE FROM despesas_empresa
-        WHERE id = ?
+        WHERE id = %s
     """, (id,))
 
     conn.commit()

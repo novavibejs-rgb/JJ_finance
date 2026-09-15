@@ -1,9 +1,11 @@
-{% extends "layout/base.html" %} {% block titulo %}Despesas da Empresa{%
+{% extends "layout/base.html" %} {% block titulo %} Despesas da Empresa {%
 endblock %} {% block css %}
+
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/despesas.css') }}"
 />
+
 {% endblock %} {% block conteudo %}
 
 <h1>Despesas da Empresa</h1>
@@ -12,17 +14,23 @@ endblock %} {% block css %}
   ➕ Nova Despesa
 </a>
 
-<br /><br />
+<br />
+<br />
 
 <div class="table-responsive tabela-despesas-wrapper">
   <table class="table tabela-despesas">
     <thead>
       <tr>
         <th>Data</th>
+
         <th>Categoria</th>
+
         <th>Descrição</th>
+
         <th>Valor</th>
+
         <th>Observação</th>
+
         <th>Ações</th>
       </tr>
     </thead>
@@ -31,27 +39,33 @@ endblock %} {% block css %}
       {% for despesa in despesas %}
 
       <tr>
-        <td>{{ despesa[4] }}</td>
+        <td>{{ despesa["data"] }}</td>
 
-        <td>{{ despesa[1] }}</td>
+        <td>{{ despesa["categoria"] }}</td>
 
-        <td>{{ despesa[2] }}</td>
+        <td>{{ despesa["descricao"] }}</td>
 
-        <td>R$ {{ "%.2f"|format(despesa[3]|float) }}</td>
+        <td>R$ {{ "%.2f"|format(despesa["valor"]|float) }}</td>
 
-        <td>{{ despesa[5] }}</td>
+        <td>{{ despesa["observacao"] }}</td>
 
         <td>
           <a
             class="btn btn-warning"
-            href="{{ url_for('despesas.editar', id=despesa[0]) }}"
+            href="{{ url_for(
+                            'despesas.editar',
+                            id=despesa['id']
+                        ) }}"
           >
             ✏ Editar
           </a>
 
           <a
             class="btn btn-danger"
-            href="{{ url_for('despesas.excluir', id=despesa[0]) }}"
+            href="{{ url_for(
+                            'despesas.excluir',
+                            id=despesa['id']
+                        ) }}"
             onclick="return confirm('Deseja realmente excluir esta despesa?');"
           >
             🗑 Excluir

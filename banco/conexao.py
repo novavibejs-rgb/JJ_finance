@@ -1,16 +1,19 @@
-import sqlite3
-from pathlib import Path
+import os
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+import psycopg
+from psycopg.rows import dict_row
 
-PASTA_INSTANCE = BASE_DIR / "instance"
-PASTA_INSTANCE.mkdir(parents=True, exist_ok=True)
 
-DB = PASTA_INSTANCE / "financeiro.db"
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 
 def conectar():
-    conn = sqlite3.connect(DB)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys = ON")
-    return conn
+    if not DATABASE_URL:
+        raise RuntimeError(
+            "DATABASE_URL não configurada."
+        )
+
+    return psycopg.connect(
+        DATABASE_URL,
+        row_factory=dict_row
+    )

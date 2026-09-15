@@ -40,7 +40,7 @@ def criar_configuracao(
             endereco,
             logo
         )
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s)
     """, (
         nome_empresa,
         telefone,
@@ -67,12 +67,12 @@ def atualizar_configuracao(
     conexao.execute("""
         UPDATE configuracao
         SET
-            nome_empresa = ?,
-            telefone = ?,
-            email = ?,
-            endereco = ?,
-            logo = ?
-        WHERE id = ?
+            nome_empresa = %s,
+            telefone = %s,
+            email = %s,
+            endereco = %s,
+            logo = %s
+        WHERE id = %s
     """, (
         nome_empresa,
         telefone,
@@ -124,7 +124,7 @@ def salvar_configuracao_email(
             email,
             senha
         )
-        VALUES (?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s)
     """, (
         smtp_server,
         smtp_port,
@@ -193,11 +193,11 @@ def atualizar_configuracao_email(
     conexao.execute("""
         UPDATE configuracao_email
         SET
-            smtp_server = ?,
-            smtp_port = ?,
-            email = ?,
-            senha = ?
-        WHERE id = ?
+            smtp_server = %s,
+            smtp_port = %s,
+            email = %s,
+            senha = %s
+        WHERE id = %s
     """, (
         smtp_server,
         smtp_port,

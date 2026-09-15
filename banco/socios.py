@@ -66,7 +66,7 @@ def buscar_socio_por_id(id):
             telefone,
             status
         FROM socios
-        WHERE id = ?
+        WHERE id = %s
     """, (id,))
 
     socio = cursor.fetchone()
@@ -98,7 +98,7 @@ def cadastrar_socio(
             telefone,
             status
         )
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s)
     """, (
         nome,
         email,
@@ -130,11 +130,11 @@ def atualizar_socio(
     cursor.execute("""
         UPDATE socios
         SET
-            nome = ?,
-            email = ?,
-            foto = ?,
-            telefone = ?
-        WHERE id = ?
+            nome = %s,
+            email = %s,
+            foto = %s,
+            telefone = %s
+        WHERE id = %s
     """, (
         nome,
         email,
@@ -159,8 +159,8 @@ def alterar_status_socio(id, status):
 
     cursor.execute("""
         UPDATE socios
-        SET status = ?
-        WHERE id = ?
+        SET status = %s
+        WHERE id = %s
     """, (
         status,
         id
@@ -182,7 +182,7 @@ def excluir_socio(id):
 
     cursor.execute("""
         DELETE FROM socios
-        WHERE id = ?
+        WHERE id = %s
     """, (id,))
 
     conexao.commit()

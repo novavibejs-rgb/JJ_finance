@@ -23,7 +23,7 @@ def cadastrar_vale(
             fim_semana,
             data
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
         """,
         (
             id_pessoa,
@@ -80,16 +80,16 @@ def listar_vales(pesquisa=None):
 
         sql += """
             WHERE
-                CAST(vales.id_pessoa AS TEXT) LIKE ?
+                CAST(vales.id_pessoa AS TEXT) LIKE %s
                 OR
                 (
                     vales.tipo_pessoa = 'socio'
-                    AND socios.nome LIKE ?
+                    AND socios.nome LIKE %s
                 )
                 OR
                 (
                     vales.tipo_pessoa = 'funcionario'
-                    AND funcionarios.nome LIKE ?
+                    AND funcionarios.nome LIKE %s
                 )
         """
 
@@ -130,7 +130,7 @@ def buscar_vale_por_id(id):
             fim_semana,
             data
         FROM vales
-        WHERE id = ?
+        WHERE id = %s
         """,
         (id,),
     ).fetchone()
@@ -156,14 +156,14 @@ def atualizar_vale(
         """
         UPDATE vales
         SET
-            id_pessoa = ?,
-            tipo_pessoa = ?,
-            valor = ?,
-            descricao = ?,
-            inicio_semana = ?,
-            fim_semana = ?,
-            data = ?
-        WHERE id = ?
+            id_pessoa = %s,
+            tipo_pessoa = %s,
+            valor = %s,
+            descricao = %s,
+            inicio_semana = %s,
+            fim_semana = %s,
+            data = %s
+        WHERE id = %s
         """,
         (
             id_pessoa,
@@ -187,7 +187,7 @@ def excluir_vale(id):
     conexao.execute(
         """
         DELETE FROM vales
-        WHERE id = ?
+        WHERE id = %s
         """,
         (id,),
     )

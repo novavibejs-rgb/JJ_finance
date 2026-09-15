@@ -6,23 +6,23 @@ from datetime import timedelta
 def faturamento_semana():
 
     conn = conectar()
+
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT SUM(valor)
+        SELECT SUM(valor) AS total
         FROM servicos
-        WHERE data BETWEEN ? AND ?
+        WHERE data BETWEEN %s AND %s
     """, (
         inicio_semana().strftime("%Y-%m-%d"),
         fim_semana().strftime("%Y-%m-%d")
     ))
 
-    total = cursor.fetchone()[0]
+    total = cursor.fetchone()["total"]
 
     conn.close()
 
     return total if total else 0
-
 
 def faturamento_por_dia():
 
@@ -34,7 +34,7 @@ def faturamento_por_dia():
             data,
             SUM(valor) AS total
         FROM servicos
-        WHERE data BETWEEN ? AND ?
+        WHERE data BETWEEN %s AND %s
         GROUP BY data
         ORDER BY data
     """, (

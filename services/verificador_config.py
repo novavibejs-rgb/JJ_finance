@@ -1,6 +1,10 @@
+import logging
 import smtplib
 
 from banco.configuracao import buscar_configuracao_email
+
+
+logger = logging.getLogger(__name__)
 
 
 def verificar_smtp():
@@ -8,7 +12,10 @@ def verificar_smtp():
     configuracao = buscar_configuracao_email()
 
     if not configuracao:
-        return False, "Nenhuma configuração de e-mail cadastrada."
+        return (
+            False,
+            "Nenhuma configuração de e-mail cadastrada."
+        )
 
     servidor = None
 
@@ -26,9 +33,7 @@ def verificar_smtp():
         )
 
         servidor.ehlo()
-
         servidor.starttls()
-
         servidor.ehlo()
 
         servidor.login(
@@ -36,11 +41,61 @@ def verificar_smtp():
             senha
         )
 
-        return True, "Conexão SMTP realizada com sucesso."
+        return (
+            True,
+            "Conexão com o servidor de e-mail realizada com sucesso."
+        )
+
+    except smtplib.SMTPAuthenticationError as erro:
+
+        logger.error(
+            "Falha de autenticação SMTP: %s",
+            erro
+        )
+
+        return (
+            False,
+            "O servidor de e-mail recusou as credenciais. "
+            "Verifique o endereço de e-mail e a senha de aplicativo."
+        )
+
+    except smtplib.SMTPConnectError as erro:
+
+        logger.error(
+            "Falha ao conectar ao servidor SMTP: %s",
+            erro
+        )
+
+        return (
+            False,
+            "Não foi possível conectar ao servidor de e-mail. "
+            "Verifique o servidor SMTP e a porta configurada."
+        )
+
+    except (TimeoutError, OSError) as erro:
+
+        logger.error(
+            "Erro de conexão SMTP: %s",
+            erro
+        )
+
+        return (
+            False,
+            "Não foi possível conectar ao servidor de e-mail. "
+            "Verifique sua conexão e as configurações SMTP."
+        )
 
     except Exception as erro:
 
-        return False, f"Erro ao conectar ao servidor SMTP: {erro}"
+        logger.exception(
+            "Erro inesperado ao verificar SMTP."
+        )
+
+        return (
+            False,
+            "Não foi possível verificar a configuração de e-mail. "
+            "Tente novamente."
+        )
 
     finally:
 
@@ -48,5 +103,6 @@ def verificar_smtp():
 
             try:
                 servidor.quit()
+
             except Exception:
                 pass

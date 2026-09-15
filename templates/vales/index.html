@@ -1,9 +1,11 @@
-{% extends "layout/base.html" %} {% block titulo %}Vales{% endblock %} {% block
-css %}
+{% extends "layout/base.html" %} {% block titulo %} Vales {% endblock %} {%
+block css %}
+
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/vales.css') }}"
 />
+
 {% endblock %} {% block conteudo %}
 
 <!-- CABEÇALHO -->
@@ -55,19 +57,12 @@ css %}
     <thead>
       <tr>
         <th>ID</th>
-
         <th>Pessoa</th>
-
         <th>Tipo</th>
-
         <th>Data</th>
-
         <th>Valor</th>
-
         <th>Descrição</th>
-
         <th>Semana</th>
-
         <th>Ações</th>
       </tr>
     </thead>
@@ -79,23 +74,23 @@ css %}
         <!-- ID DA PESSOA -->
 
         <td>
-          <strong> {{ vale[1] }} </strong>
+          <strong> {{ vale["id_pessoa"] }} </strong>
         </td>
 
         <!-- PESSOA -->
 
         <td>
-          <strong> {{ vale[3] or "Pessoa não encontrada" }} </strong>
+          <strong> {{ vale["nome"] or "Pessoa não encontrada" }} </strong>
         </td>
 
         <!-- TIPO -->
 
         <td>
-          {% if vale[2] == "socio" %}
+          {% if vale["tipo_pessoa"] == "socio" %}
 
           <span class="tipo-vale tipo-socio"> 👤 Sócio </span>
 
-          {% elif vale[2] == "funcionario" %}
+          {% elif vale["tipo_pessoa"] == "funcionario" %}
 
           <span class="tipo-vale tipo-funcionario"> 👷 Funcionário </span>
 
@@ -108,25 +103,26 @@ css %}
 
         <!-- DATA -->
 
-        <td>{{ vale[8] or "-" }}</td>
+        <td>{{ vale["data"] or "-" }}</td>
 
         <!-- VALOR -->
 
         <td>
           <strong class="valor-vale">
-            R$ {{ "%.2f"|format(vale[4]|float) }}
+            R$ {{ "%.2f"|format(vale["valor"]|float) }}
           </strong>
         </td>
 
         <!-- DESCRIÇÃO -->
 
-        <td>{{ vale[5] or "-" }}</td>
+        <td>{{ vale["descricao"] or "-" }}</td>
 
         <!-- SEMANA -->
 
         <td>
           <span class="semana-vale">
-            {{ vale[6] or "-" }} até {{ vale[7] or "-" }}
+            {{ vale["inicio_semana"] or "-" }} até {{ vale["fim_semana"] or "-"
+            }}
           </span>
         </td>
 
@@ -135,14 +131,20 @@ css %}
         <td>
           <div class="acoes-vale">
             <a
-              href="{{ url_for('vales.editar', id=vale[0]) }}"
+              href="{{ url_for(
+                                'vales.editar',
+                                id=vale['id']
+                            ) }}"
               class="btn btn-warning"
             >
               ✏ Editar
             </a>
 
             <a
-              href="{{ url_for('vales.excluir', id=vale.id) }}"
+              href="{{ url_for(
+                                'vales.excluir',
+                                id=vale['id']
+                            ) }}"
               class="btn btn-danger"
               onclick="return confirm('Deseja realmente excluir este vale?');"
             >
@@ -157,7 +159,8 @@ css %}
       <tr>
         <td colspan="8" class="text-center">
           {% if pesquisa %} Nenhum vale encontrado para:
-          <strong>{{ pesquisa }}</strong>
+
+          <strong> {{ pesquisa }} </strong>
 
           {% else %} Nenhum vale cadastrado. {% endif %}
         </td>

@@ -71,8 +71,29 @@ def enviar_email(
 
         return True, "E-mail enviado com sucesso."
 
-    except Exception as erro:
-        return False, f"Erro ao enviar e-mail: {erro}"
+    except smtplib.SMTPAuthenticationError:
+        return False, (
+            "Não foi possível enviar o e-mail. "
+            "Verifique o endereço de e-mail e a senha de aplicativo."
+        )
+
+    except smtplib.SMTPConnectError:
+        return False, (
+            "Não foi possível conectar ao servidor de e-mail. "
+            "Verifique o servidor SMTP e a porta configurada."
+        )
+
+    except (TimeoutError, OSError):
+        return False, (
+            "Não foi possível conectar ao servidor de e-mail. "
+            "Verifique sua conexão e as configurações SMTP."
+        )
+
+    except Exception:
+        return False, (
+            "Não foi possível enviar o e-mail de teste. "
+            "Verifique as configurações de e-mail e tente novamente."
+        )
 
     finally:
         if servidor is not None:

@@ -1,12 +1,10 @@
 {% extends "layout/base.html" %} {% block titulo %} Serviços {% endblock %} {%
-block conteudo %} {% block css %}
-
+block css %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/servicos.css') }}"
 />
-
-{% endblock %}
+{% endblock %} {% block conteudo %}
 
 <h1>Serviços</h1>
 
@@ -34,29 +32,35 @@ block conteudo %} {% block css %}
       {% for servico in servicos %}
 
       <tr>
-        <td>{{ servico[6] | data }}</td>
+        <td>{{ servico["data"] | data }}</td>
 
-        <td>{{ servico[1] }}</td>
+        <td>{{ servico["cliente"] }}</td>
 
-        <td>{{ servico[2] }}</td>
+        <td>{{ servico["servico"] }}</td>
 
-        <td>{{ servico[3] or "-" }}</td>
+        <td>{{ servico["descricao"] or "-" }}</td>
 
-        <td>R$ {{ "%.2f"|format(servico[4]|float) }}</td>
+        <td>R$ {{ "%.2f"|format(servico["valor"]|float) }}</td>
 
-        <td>{{ servico[5] or "-" }}</td>
+        <td>{{ servico["forma_pagamento"] or "-" }}</td>
 
         <td>
           <a
             class="btn btn-warning"
-            href="{{ url_for('servicos.editar', id=servico[0]) }}"
+            href="{{ url_for(
+                            'servicos.editar',
+                            id=servico['id']
+                        ) }}"
           >
             ✏ Editar
           </a>
 
           <a
             class="btn btn-danger"
-            href="{{ url_for('servicos.excluir', id=servico[0]) }}"
+            href="{{ url_for(
+                            'servicos.excluir',
+                            id=servico['id']
+                        ) }}"
             onclick="return confirm('Deseja realmente excluir este serviço?');"
           >
             🗑 Excluir

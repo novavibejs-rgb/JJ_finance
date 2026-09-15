@@ -2,6 +2,10 @@
    CONFIGURAÇÕES - J&J FINANCE
    ========================================================= */
 
+/* =========================================================
+   CONTAINER PRINCIPAL
+   ========================================================= */
+
 .configuracoes-container {
   width: 100%;
   max-width: 1000px;
@@ -56,6 +60,7 @@
   border-radius: 50%;
 
   background: linear-gradient(135deg, #b60f7e, #1555d6);
+
   color: #ffffff;
 
   cursor: pointer;
@@ -132,6 +137,7 @@
   margin: 0 0 25px;
 
   font-size: 14px;
+
   opacity: 0.65;
 }
 
@@ -177,11 +183,13 @@
 .form-group select,
 .form-group textarea {
   width: 100%;
+
   box-sizing: border-box;
 
   padding: 12px 14px;
 
   border: 1px solid #d8d8d8;
+
   border-radius: 10px;
 
   background: #ffffff;
@@ -210,7 +218,7 @@
 }
 
 /* =========================================================
-   INPUT DE ARQUIVO
+   UPLOAD DE LOGO
    ========================================================= */
 
 .form-group input[type="file"] {
@@ -227,56 +235,18 @@
   padding: 8px 12px;
 
   border: none;
+
   border-radius: 8px;
 
   background: #1555d6;
+
   color: #ffffff;
 
   cursor: pointer;
 }
 
 /* =========================================================
-   BOTÕES PRINCIPAIS
-   ========================================================= */
-
-.configuracao-secao button[type="submit"] {
-  width: 100%;
-  min-height: 46px;
-
-  padding: 12px 18px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: linear-gradient(135deg, #b60f7e, #1555d6);
-
-  color: #ffffff;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  box-shadow: 0 5px 15px rgba(21, 85, 214, 0.18);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    opacity 0.2s ease;
-}
-
-.configuracao-secao button[type="submit"]:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 8px 20px rgba(21, 85, 214, 0.25);
-}
-
-.configuracao-secao button[type="submit"]:active {
-  transform: translateY(0);
-}
-
-/* =========================================================
-   LOGO
+   PREVIEW DA LOGO
    ========================================================= */
 
 .logo-preview {
@@ -316,38 +286,49 @@
 }
 
 /* =========================================================
-   RESULTADO SMTP
+   BOTÃO PRINCIPAL
    ========================================================= */
 
-.resultado-smtp {
-  margin-top: 20px;
+.configuracao-secao button[type="submit"] {
+  width: 100%;
 
-  padding: 14px 16px;
+  min-height: 46px;
+
+  padding: 12px 18px;
+
+  border: none;
 
   border-radius: 10px;
 
+  background: linear-gradient(135deg, #b60f7e, #1555d6);
+
+  color: #ffffff;
+
   font-size: 14px;
   font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 15px rgba(21, 85, 214, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 
-.resultado-smtp.sucesso {
-  background: #e9f8ef;
+.configuracao-secao button[type="submit"]:hover {
+  transform: translateY(-2px);
 
-  color: #16733b;
-
-  border: 1px solid #b8e5c8;
+  box-shadow: 0 8px 20px rgba(21, 85, 214, 0.25);
 }
 
-.resultado-smtp.erro {
-  background: #fff0f0;
-
-  color: #b42318;
-
-  border: 1px solid #f0bcbc;
+.configuracao-secao button[type="submit"]:active {
+  transform: translateY(0);
 }
 
 /* =========================================================
-   SEÇÃO DE E-MAIL
+   CONFIGURAÇÃO DE E-MAIL
    ========================================================= */
 
 .configuracao-secao[data-config="email"] .configuracao-conteudo {
@@ -359,59 +340,176 @@
 }
 
 /* =========================================================
-   AÇÕES DE E-MAIL
+   ÁREA DE TESTE DE E-MAIL
    ========================================================= */
 
 .acoes-email {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin-top: 30px;
+
+  padding: 26px;
+
+  border: 1px solid #e4e9f2;
+
+  border-radius: 20px;
+
+  background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+
+  box-shadow:
+    0 12px 35px rgba(15, 23, 42, 0.07),
+    0 2px 8px rgba(15, 23, 42, 0.03);
+
   display: flex;
+  flex-direction: column;
 
-  gap: 12px;
+  gap: 22px;
 
-  margin-top: 18px;
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
-.acoes-email form {
-  flex: 1;
+/* =========================================================
+   CABEÇALHO DO TESTE
+   ========================================================= */
+
+.cabecalho-acoes-email {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
 }
 
-.botao-acao-email {
-  width: 100% !important;
-  min-height: 44px !important;
+.icone-email-teste {
+  width: 50px;
+  height: 50px;
+
+  flex-shrink: 0;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  gap: 8px;
+  border-radius: 15px;
 
-  padding: 10px 16px !important;
+  background: linear-gradient(135deg, #eef4ff, #e8edff);
 
-  border: 1px solid #dcdcdc !important;
-  border-radius: 10px !important;
+  border: 1px solid #dbe5ff;
+
+  font-size: 22px;
+
+  box-shadow: 0 5px 15px rgba(21, 85, 214, 0.08);
+}
+
+.cabecalho-acoes-email h3 {
+  margin: 0 0 5px;
+
+  color: #172033;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  letter-spacing: -0.2px;
+}
+
+.cabecalho-acoes-email p {
+  margin: 0;
+
+  max-width: 720px;
+
+  color: #667085;
+
+  font-size: 14px;
+
+  line-height: 1.55;
+}
+
+/* =========================================================
+   BOTÕES DE TESTE
+   ========================================================= */
+
+.botoes-acoes-email {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.botoes-acoes-email form {
+  width: auto;
+
+  margin: 0;
+}
+
+/* =========================================================
+   BOTÃO DE TESTE
+   ========================================================= */
+
+.botao-acao-email {
+  width: auto !important;
+
+  height: 46px !important;
+  min-height: 46px !important;
+
+  padding: 0 20px !important;
+
+  border: 1px solid #dce3ef !important;
+
+  border-radius: 12px !important;
 
   background: #ffffff !important;
-  color: #333333 !important;
 
-  box-shadow: none !important;
+  color: #24324a !important;
 
-  font-size: 13px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
+
+  display: inline-flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
 
   cursor: pointer;
 
-  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.03) !important;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease !important;
 }
 
 .botao-acao-email:hover {
-  transform: translateY(-1px) !important;
+  transform: translateY(-2px) !important;
 
   border-color: #1555d6 !important;
 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  background: #f7f9ff !important;
+
+  box-shadow: 0 8px 20px rgba(21, 85, 214, 0.12) !important;
 }
 
 .botao-acao-email:active {
   transform: translateY(0) !important;
+
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+.botao-acao-email:focus-visible {
+  outline: 3px solid rgba(21, 85, 214, 0.2);
+
+  outline-offset: 3px;
 }
 
 .icone-acao {
@@ -421,43 +519,184 @@
 }
 
 /* =========================================================
-   SISTEMA
+   RESULTADO DO TESTE
    ========================================================= */
 
-.configuracao-secao[data-config="sistema"] .configuracao-conteudo {
-  margin-top: 20px;
-}
+.resultado-smtp {
+  width: 100%;
 
-/* =========================================================
-   APARÊNCIA
-   ========================================================= */
-
-.configuracao-secao[data-config="aparencia"] .configuracao-conteudo {
-  min-height: 150px;
+  box-sizing: border-box;
 
   display: flex;
+
+  align-items: flex-start;
+
+  gap: 13px;
+
+  padding: 16px 18px;
+
+  border-radius: 14px;
+
+  animation: aparecerResultado 0.3s ease;
+}
+
+.resultado-smtp-icone {
+  width: 31px;
+  height: 31px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
   align-items: center;
   justify-content: center;
 
-  border-radius: 12px;
+  border-radius: 50%;
 
-  background: #f8f8f8;
-
-  border: 1px dashed #d5d5d5;
+  font-size: 15px;
+  font-weight: 800;
 }
 
-.configuracao-secao[data-config="aparencia"] .configuracao-conteudo p {
-  margin: 0;
+.resultado-smtp-conteudo {
+  display: flex;
 
-  text-align: center;
+  flex-direction: column;
 
+  gap: 4px;
+}
+
+.resultado-smtp-conteudo strong {
   font-size: 14px;
 
-  opacity: 0.6;
+  font-weight: 700;
+}
+
+.resultado-smtp-conteudo span {
+  font-size: 13px;
+
+  line-height: 1.55;
 }
 
 /* =========================================================
-   RESPONSIVIDADE
+   SUCESSO
+   ========================================================= */
+
+.resultado-smtp.sucesso {
+  border: 1px solid #bbf7d0;
+
+  background: linear-gradient(135deg, #f0fdf4, #f7fff9);
+
+  color: #166534;
+}
+
+.resultado-smtp.sucesso .resultado-smtp-icone {
+  background: #22c55e;
+
+  color: #ffffff;
+
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
+}
+
+/* =========================================================
+   ERRO
+   ========================================================= */
+
+.resultado-smtp.erro {
+  border: 1px solid #fecaca;
+
+  background: linear-gradient(135deg, #fff7f7, #fffafa);
+
+  color: #991b1b;
+}
+
+.resultado-smtp.erro .resultado-smtp-icone {
+  background: #ef4444;
+
+  color: #ffffff;
+
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.18);
+}
+
+/* =========================================================
+   ANIMAÇÃO DO RESULTADO
+   ========================================================= */
+
+@keyframes aparecerResultado {
+  from {
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   RESPONSIVIDADE - TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .acoes-email {
+    padding: 20px;
+
+    border-radius: 17px;
+
+    gap: 18px;
+  }
+
+  .cabecalho-acoes-email {
+    align-items: flex-start;
+  }
+
+  .icone-email-teste {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 13px;
+
+    font-size: 19px;
+  }
+
+  .cabecalho-acoes-email h3 {
+    font-size: 16px;
+  }
+
+  .cabecalho-acoes-email p {
+    font-size: 13px;
+  }
+
+  .botoes-acoes-email {
+    width: 100%;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 10px;
+  }
+
+  .botoes-acoes-email form {
+    width: 100%;
+  }
+
+  .botao-acao-email {
+    width: 100% !important;
+
+    height: 46px !important;
+    min-height: 46px !important;
+  }
+
+  .resultado-smtp {
+    padding: 14px;
+
+    gap: 10px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVIDADE - CELULAR
    ========================================================= */
 
 @media (max-width: 700px) {
@@ -508,16 +747,8 @@
 }
 
 /* =========================================================
-   CELULAR PEQUENO
+   CELULARES PEQUENOS
    ========================================================= */
-
-@media (max-width: 500px) {
-  .acoes-email {
-    flex-direction: column;
-
-    gap: 10px;
-  }
-}
 
 @media (max-width: 400px) {
   .configuracoes-titulo h1 {
@@ -533,5 +764,20 @@
 
   .configuracao-secao {
     padding: 18px 13px;
+  }
+
+  .acoes-email {
+    padding: 16px;
+  }
+
+  .cabecalho-acoes-email {
+    gap: 10px;
+  }
+
+  .icone-email-teste {
+    width: 40px;
+    height: 40px;
+
+    font-size: 17px;
   }
 }
